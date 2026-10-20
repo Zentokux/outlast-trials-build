@@ -31,7 +31,7 @@ body::before{content:"";position:fixed;inset:-50%;z-index:50;pointer-events:none
 
 /* menú */
 nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;gap:4px;justify-content:center;flex-wrap:wrap;
-  padding:8px 16px;background:linear-gradient(#0b0c0aee,#0b0c0a00)}
+  padding:8px 16px;background:#0b0c0ae6;border-bottom:1px solid #1d2019;backdrop-filter:blur(6px)}
 nav a{font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);text-decoration:none;padding:6px 10px;border:1px solid transparent}
 nav a:hover,nav a.activo{color:var(--verde);border-color:var(--verde-osc);background:#0b0c0acc}
 
@@ -160,20 +160,59 @@ footer li{margin-bottom:6px}
 /* aparición al hacer scroll */
 .aparece{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .aparece.visto{opacity:1;transform:none}
+
+/* ===== vistas: una parte por pantalla ===== */
+.vista{display:none}
+.vista.activa{display:block;animation:flash .6s ease-out}
+@keyframes flash{0%{opacity:0;filter:brightness(2.2) contrast(1.4) blur(3px)}35%{opacity:1}100%{filter:none}}
+@media (prefers-reduced-motion:reduce){.vista.activa{animation:none}}
+.vista .escena{min-height:42vh}
+nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid var(--borde);padding:2px 6px;margin:0 4px;align-self:center;background:#000a;cursor:pointer}
+nav a .n{color:var(--verde);margin-right:5px}
+@media (max-width:700px){nav .q{display:none} nav a{padding:5px 7px;font-size:11px} nav a .t{display:none} nav a .n{margin:0}}
+/* accesos rápidos de la portada */
+.accesos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:30px auto 0;max-width:820px}
+@media (max-width:700px){.accesos{grid-template-columns:repeat(2,1fr)}}
+.acceso{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--borde);text-decoration:none;color:var(--texto);background:#000 center/cover}
+.acceso::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,#000e);transition:background .3s}
+.acceso:hover{border-color:var(--verde)}
+.acceso:hover::after{background:linear-gradient(transparent 0%,#0b1a06cc)}
+.acceso span{position:absolute;z-index:2;left:10px;right:10px;bottom:8px;text-align:left;font:400 18px/1.1 "Special Elite",monospace}
+.acceso small{display:block;font:600 11px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.15em}
+/* pasar de parte */
+.pasar{max-width:1100px;margin:0 auto;padding:0 16px 80px;display:flex;justify-content:space-between;gap:10px}
+.pasar a{flex:1;max-width:48%;display:block;padding:14px 16px;border:1px solid var(--borde);background:var(--papel);text-decoration:none;color:var(--texto);font:400 20px "Special Elite",monospace}
+.pasar a:hover{border-color:var(--verde)}
+.pasar a small{display:block;font:600 11px "Roboto Mono",monospace;color:var(--suave);letter-spacing:.12em}
+.pasar a.sig{text-align:right;margin-left:auto}
+/* botón de sonido */
+#sonido{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:8px;padding:10px 14px;background:#000d;border:1px solid var(--verde-osc);color:var(--verde);font:600 12px "Roboto Mono",monospace;letter-spacing:.1em;cursor:pointer}
+#sonido:hover{border-color:var(--verde)}
+#sonido .ondas{display:flex;gap:2px;align-items:flex-end;height:14px}
+#sonido .ondas i{width:3px;background:var(--verde);height:3px}
+#sonido.on .ondas i{animation:onda 1s infinite ease-in-out}
+#sonido.on .ondas i:nth-child(2){animation-delay:.2s}#sonido.on .ondas i:nth-child(3){animation-delay:.4s}
+@keyframes onda{50%{height:14px}}
+@media (max-width:700px){#sonido .txt{display:none} #sonido{padding:12px}}
 </style>
 </head>
 <body>
 
 <nav id="menu">
-  <a href="#ruta">Ruta</a>
-  <a href="#artefactos">Artefactos</a>
-  <a href="#amplificadores">Amplificadores</a>
-  <a href="#recetas">Recetas</a>
-  <a href="#prueba">En la prueba</a>
-  <a href="#escalada">Escalada</a>
+  <span class="q" title="Parte anterior">Q</span>
+  <a href="#inicio"><span class="n">◉</span><span class="t">Inicio</span></a>
+  <a href="#ruta"><span class="n">01</span><span class="t">Ruta</span></a>
+  <a href="#artefactos"><span class="n">02</span><span class="t">Artefactos</span></a>
+  <a href="#amplificadores"><span class="n">03</span><span class="t">Amplificadores</span></a>
+  <a href="#recetas"><span class="n">04</span><span class="t">Recetas</span></a>
+  <a href="#prueba"><span class="n">05</span><span class="t">En la prueba</span></a>
+  <a href="#escalada"><span class="n">06</span><span class="t">Escalada</span></a>
+  <span class="q" title="Parte siguiente">E</span>
 </nav>
+<button id="sonido" type="button" aria-pressed="false"><span class="ondas"><i></i><i></i><i></i></span><span class="txt">SONIDO: NO</span></button>
 
-<!-- PORTADA -->
+<!-- INICIO -->
+<section class="vista" id="inicio">
 <header class="portada" id="portada">
   <div class="oscuro"></div>
   <div class="contenido">
@@ -188,12 +227,43 @@ footer li{margin-bottom:6px}
       <div>Parche<b>17-sep-2026</b></div>
       <div>Temporada<b>7.1</b></div>
     </div>
+    <div class="accesos">
+      <a class="acceso" href="#ruta" style="background-image:url(img/escenas/steam-captura-1.jpg)"><span><small>01</small>Tu ruta</span></a>
+      <a class="acceso" href="#artefactos" style="background-image:url(img/escenas/steam-captura-3.jpg)"><span><small>02</small>Artefactos</span></a>
+      <a class="acceso" href="#amplificadores" style="background-image:url(img/escenas/steam-captura-8.jpg)"><span><small>03</small>Amplificadores</span></a>
+      <a class="acceso" href="#recetas" style="background-image:url(img/escenas/steam-captura-5.jpg)"><span><small>04</small>Recetas</span></a>
+      <a class="acceso" href="#prueba" style="background-image:url(img/escenas/steam-captura-7.jpg)"><span><small>05</small>En la prueba</span></a>
+      <a class="acceso" href="#escalada" style="background-image:url(img/escenas/steam-captura-4.jpg)"><span><small>06</small>Escalada</span></a>
+    </div>
   </div>
-  <div class="bajar">▼ BAJA CON CUIDADO</div>
+  <div class="bajar">Q / E o ← → para cambiar de parte</div>
 </header>
+<!-- VILLANOS -->
+<div class="villanos">
+  <figure><img src="img/escenas/mother-gooseberry.jpg" alt="Mother Gooseberry" loading="lazy"><figcaption>Mother Gooseberry</figcaption></figure>
+  <figure><img src="img/escenas/leland-coyle.jpg" alt="Leland Coyle" loading="lazy"><figcaption>Leland Coyle</figcaption></figure>
+  <figure><img src="img/escenas/franco-barbi.jpg" alt="Franco Barbi" loading="lazy"><figcaption>Franco Barbi</figcaption></figure>
+</div>
+<footer>
+  <div class="bloque">
+    <h2>Fuentes</h2>
+    <ul>
+      <li>Red Barrels, hotfix del 17-sep-2026 (es el último parche): redbarrelsgames.com/support/hotfix-sept-17/</li>
+      <li>Red Barrels, notas de Chemical Leak (Temporada 7.1, 8-sep-2026): redbarrelsgames.com/support/chemicalleak2026_patchnotes/</li>
+      <li>Red Barrels, notas de Project Boneyard (Temporada 7, 14-jul-2026): redbarrelsgames.com/support/s7_projectboneyard-patchnotes/</li>
+      <li>Red Barrels, notas de Project Judas (cambios del X-Ray y la Barricade, 24-mar-2026): redbarrelsgames.com/news/project-judas-patchnotes/</li>
+      <li>Wiki de Fandom, páginas Rigs, Amps, Prescriptions, Escalation y Relapse Initiative (consultadas el 19-oct-2026): outlast.fandom.com</li>
+      <li>GameRant, rangos de artefactos y de amplificadores (29-jul-2026)</li>
+      <li>FandomWire, artefactos ordenados (9-oct-2026)</li>
+      <li>Nombres en español: tus capturas del juego (menús de Noakes y Barlow, 19 y 20-oct-2026)</li>
+      <li>Imágenes: Steam (app 1304930) y la wiki de Fandom. © Red Barrels</li>
+    </ul>
+  </div>
+</footer>
+</section>
 
 <!-- 01 RUTA -->
-<section id="ruta">
+<section class="vista" id="ruta">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-1.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 01</div>
@@ -288,7 +358,7 @@ footer li{margin-bottom:6px}
 </section>
 
 <!-- 02 ARTEFACTOS -->
-<section id="artefactos">
+<section class="vista" id="artefactos">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-3.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 02</div>
@@ -344,7 +414,7 @@ footer li{margin-bottom:6px}
 </section>
 
 <!-- 03 AMPLIFICADORES -->
-<section id="amplificadores">
+<section class="vista" id="amplificadores">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-8.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 03</div>
@@ -380,7 +450,7 @@ footer li{margin-bottom:6px}
 </section>
 
 <!-- 04 RECETAS -->
-<section id="recetas">
+<section class="vista" id="recetas">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-5.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 04</div>
@@ -432,7 +502,7 @@ footer li{margin-bottom:6px}
 </section>
 
 <!-- 05 EN LA PRUEBA -->
-<section id="prueba">
+<section class="vista" id="prueba">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-7.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 05</div>
@@ -452,15 +522,9 @@ footer li{margin-bottom:6px}
   </div>
 </section>
 
-<!-- VILLANOS -->
-<div class="villanos">
-  <figure><img src="img/escenas/mother-gooseberry.jpg" alt="Mother Gooseberry" loading="lazy"><figcaption>Mother Gooseberry</figcaption></figure>
-  <figure><img src="img/escenas/leland-coyle.jpg" alt="Leland Coyle" loading="lazy"><figcaption>Leland Coyle</figcaption></figure>
-  <figure><img src="img/escenas/franco-barbi.jpg" alt="Franco Barbi" loading="lazy"><figcaption>Franco Barbi</figcaption></figure>
-</div>
 
 <!-- 06 ESCALADA -->
-<section id="escalada">
+<section class="vista" id="escalada">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-4.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 06</div>
@@ -494,22 +558,6 @@ footer li{margin-bottom:6px}
   </div>
 </section>
 
-<footer>
-  <div class="bloque">
-    <h2>Fuentes</h2>
-    <ul>
-      <li>Red Barrels, hotfix del 17-sep-2026 (es el último parche): redbarrelsgames.com/support/hotfix-sept-17/</li>
-      <li>Red Barrels, notas de Chemical Leak (Temporada 7.1, 8-sep-2026): redbarrelsgames.com/support/chemicalleak2026_patchnotes/</li>
-      <li>Red Barrels, notas de Project Boneyard (Temporada 7, 14-jul-2026): redbarrelsgames.com/support/s7_projectboneyard-patchnotes/</li>
-      <li>Red Barrels, notas de Project Judas (cambios del X-Ray y la Barricade, 24-mar-2026): redbarrelsgames.com/news/project-judas-patchnotes/</li>
-      <li>Wiki de Fandom, páginas Rigs, Amps, Prescriptions, Escalation y Relapse Initiative (consultadas el 19-oct-2026): outlast.fandom.com</li>
-      <li>GameRant, rangos de artefactos y de amplificadores (29-jul-2026)</li>
-      <li>FandomWire, artefactos ordenados (9-oct-2026)</li>
-      <li>Nombres en español: tus capturas del juego (menús de Noakes y Barlow, 19 y 20-oct-2026)</li>
-      <li>Imágenes: Steam (app 1304930) y la wiki de Fandom. © Red Barrels</li>
-    </ul>
-  </div>
-</footer>
 
 <script>
 // linterna en la portada
@@ -527,10 +575,68 @@ portada.addEventListener('pointermove',()=>quieto=false,{once:true});
 // aparición al hacer scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visto');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.aparece').forEach(el=>io.observe(el));
-// menú activo
-const enlaces=[...document.querySelectorAll('#menu a')];
-const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){enlaces.forEach(a=>a.classList.toggle('activo',a.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
-document.querySelectorAll('section[id]').forEach(s=>io2.observe(s));
+// ===== vistas: una parte por pantalla =====
+const vistas=[...document.querySelectorAll('.vista')];
+const ids=vistas.map(v=>v.id);
+const nombre=id=>{const a=document.querySelector('#menu a[href="#'+id+'"] .t');return a?a.textContent:id;};
+vistas.forEach((v,i)=>{ if(i===0)return;
+  const bar=document.createElement('div');bar.className='pasar';
+  const ant=ids[i-1],sig=ids[i+1];
+  bar.innerHTML='<a href="#'+ant+'"><small>← ANTERIOR</small>'+nombre(ant)+'</a>'+(sig?'<a class="sig" href="#'+sig+'"><small>SIGUIENTE →</small>'+nombre(sig)+'</a>':'');
+  v.appendChild(bar);});
+function mostrar(id,sonar){
+  if(!ids.includes(id))id='inicio';
+  vistas.forEach(v=>v.classList.toggle('activa',v.id===id));
+  document.querySelectorAll('#menu a').forEach(a=>a.classList.toggle('activo',a.getAttribute('href')==='#'+id));
+  window.scrollTo(0,0);
+  if(sonar)Amb.cambio();
+}
+window.addEventListener('hashchange',()=>mostrar(location.hash.slice(1),true));
+function pasarParte(d){const i=ids.indexOf(location.hash.slice(1)||'inicio');const j=Math.min(ids.length-1,Math.max(0,(i<0?0:i)+d));if(ids[j]!==(location.hash.slice(1)||'inicio'))location.hash=ids[j];}
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.altKey||e.metaKey)return;const k=e.key.toLowerCase();
+  if(k==='q'||k==='arrowleft')pasarParte(-1); if(k==='e'||k==='arrowright')pasarParte(1);});
+document.querySelectorAll('#menu .q').forEach((q,i)=>{q.onclick=()=>pasarParte(i?1:-1);});
+
+// ===== sonido de ambiente (se genera en el navegador) =====
+const Amb=(()=>{
+  let ctx,master,RUIDO,on=false,timers=[];
+  function iniciar(){
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);
+    RUIDO=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const d=RUIDO.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    // zumbido grave del edificio
+    const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=180;lp.Q.value=6;lp.connect(master);
+    [43.65,43.9,65.4].forEach((f,i)=>{const o=ctx.createOscillator();o.type=i<2?'sawtooth':'triangle';o.frequency.value=f;const g=ctx.createGain();g.gain.value=i<2?.12:.05;o.connect(g).connect(lp);o.start();});
+    const lfo=ctx.createOscillator();lfo.frequency.value=.07;const lg=ctx.createGain();lg.gain.value=90;lfo.connect(lg).connect(lp.frequency);lfo.start();
+    // tubo fluorescente
+    const h=ctx.createOscillator();h.type='square';h.frequency.value=120;const hb=ctx.createBiquadFilter();hb.type='bandpass';hb.frequency.value=1200;hb.Q.value=8;const hg=ctx.createGain();hg.gain.value=.012;h.connect(hb).connect(hg).connect(master);h.start();
+    // aire de ventilación
+    const n=ctx.createBufferSource();n.buffer=RUIDO;n.loop=true;const nb=ctx.createBiquadFilter();nb.type='lowpass';nb.frequency.value=500;const ng=ctx.createGain();ng.gain.value=.035;n.connect(nb).connect(ng).connect(master);n.start();
+  }
+  function latido(t){[0,.28].forEach((d,i)=>{const o=ctx.createOscillator();o.type='sine';o.frequency.setValueAtTime(70,t+d);o.frequency.exponentialRampToValueAtTime(38,t+d+.18);const g=ctx.createGain();g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(i?.35:.5,t+d+.015);g.gain.exponentialRampToValueAtTime(.001,t+d+.25);o.connect(g).connect(master);o.start(t+d);o.stop(t+d+.3);});}
+  function chirrido(){const t=ctx.currentTime,s=ctx.createBufferSource();s.buffer=RUIDO;const b=ctx.createBiquadFilter();b.type='bandpass';b.Q.value=30;const f0=300+Math.random()*900;b.frequency.setValueAtTime(f0,t);b.frequency.exponentialRampToValueAtTime(f0*(.5+Math.random()),t+2.5);const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.5,t+.4);g.gain.linearRampToValueAtTime(0,t+2.6);let fin=g;if(ctx.createStereoPanner){const pan=ctx.createStereoPanner();pan.pan.value=Math.random()*2-1;g.connect(pan);fin=pan;}s.connect(b).connect(g);fin.connect(master);s.start(t);s.stop(t+2.7);}
+  function golpe(){const t=ctx.currentTime,s=ctx.createBufferSource();s.buffer=RUIDO;const b=ctx.createBiquadFilter();b.type='lowpass';b.frequency.value=220;const g=ctx.createGain();g.gain.setValueAtTime(.9,t);g.gain.exponentialRampToValueAtTime(.001,t+.6);s.connect(b).connect(g).connect(master);s.start(t);s.stop(t+.7);}
+  function programar(){
+    const ciclo=()=>{if(!on)return;const t=ctx.currentTime,n=8+Math.floor(Math.random()*8);for(let i=0;i<n;i++)latido(t+i*1.05);timers.push(setTimeout(ciclo,(n*1.05+14+Math.random()*18)*1000));};
+    const raro=()=>{if(!on)return;(Math.random()<.6?chirrido:golpe)();timers.push(setTimeout(raro,(7+Math.random()*16)*1000));};
+    timers.push(setTimeout(ciclo,4000),setTimeout(raro,2500));
+  }
+  return{
+    alternar(){if(!ctx)iniciar();on=!on;timers.forEach(clearTimeout);timers=[];
+      if(on){ctx.resume();programar();}
+      master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setTargetAtTime(on?.7:0,ctx.currentTime,.8);return on;},
+    cambio(){if(!on||!ctx)return;const t=ctx.currentTime,s=ctx.createBufferSource();s.buffer=RUIDO;const b=ctx.createBiquadFilter();b.type='highpass';b.frequency.value=2500;const g=ctx.createGain();g.gain.setValueAtTime(.25,t);g.gain.exponentialRampToValueAtTime(.001,t+.12);s.connect(b).connect(g).connect(master);s.start(t);s.stop(t+.15);golpe();},
+    activo:()=>on
+  };
+})();
+const btn=document.getElementById('sonido');
+const pintar=()=>{btn.classList.toggle('on',Amb.activo());btn.setAttribute('aria-pressed',Amb.activo());btn.querySelector('.txt').textContent='SONIDO: '+(Amb.activo()?'SÍ':'NO');};
+btn.addEventListener('click',()=>{Amb.alternar();pintar();try{localStorage.setItem('ot-sonido',Amb.activo()?'1':'0');}catch(e){}});
+// los navegadores no dejan sonar sin un clic: arranca con el primer clic o tecla (salvo que lo apagara antes)
+let quiere=true;try{quiere=localStorage.getItem('ot-sonido')!=='0';}catch(e){}
+if(quiere){const arr=e=>{if(e.target.closest&&e.target.closest('#sonido'))return;if(!Amb.activo()){Amb.alternar();pintar();}};document.addEventListener('pointerdown',arr,{once:true});document.addEventListener('keydown',arr,{once:true});}
+mostrar(location.hash.slice(1),false);
+
 </script>
 </body>
 </html>
