@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expediente Outlast Trials</title>
+<meta name="description" content="Qué priorizar en The Outlast Trials: artefactos, amplificadores, recetas y ruta por nivel de terapia (parche 17-sep-2026, Temporada 7.1).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Roboto+Mono:wght@400;600&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#0b0c0a; --papel:#151713; --papel2:#1d201a; --borde:#2e3229;
+  --texto:#d9dccf; --suave:#9aa08d; --verde:#9fe870; --verde-osc:#3e5a2a;
+  --rojo:#c8312b; --ambar:#e0b44c; --sello:#b8322b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--negro);color:var(--texto);font:400 17px/1.55 Barlow,system-ui,sans-serif;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--verde)}
+.mono{font-family:"Roboto Mono",monospace}
+.tipo{font-family:"Special Elite",monospace}
+
+/* grano y viñeta sobre todo */
+body::before{content:"";position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grano 1s steps(4) infinite}
+@keyframes grano{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+@media (prefers-reduced-motion:reduce){body::before{animation:none}.aparece{opacity:1!important;transform:none!important}}
+
+/* menú */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;gap:4px;justify-content:center;flex-wrap:wrap;
+  padding:8px 16px;background:linear-gradient(#0b0c0aee,#0b0c0a00)}
+nav a{font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);text-decoration:none;padding:6px 10px;border:1px solid transparent}
+nav a:hover,nav a.activo{color:var(--verde);border-color:var(--verde-osc);background:#0b0c0acc}
+
+/* portada con linterna */
+.portada{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;
+  background:#000 url(img/escenas/steam-library-hero.jpg) center/cover}
+.portada .oscuro{position:absolute;inset:0;background:radial-gradient(circle 260px at var(--x,50%) var(--y,45%),transparent 0,rgba(0,0,0,.55) 45%,rgba(0,0,0,.94) 100%);transition:background .05s}
+.portada .contenido{position:relative;z-index:2;padding:90px 16px 60px;max-width:820px}
+.portada img.logo{width:min(440px,80vw);margin:0 auto 18px;filter:drop-shadow(0 4px 20px #000)}
+.etiqueta{display:inline-block;font:600 12px "Roboto Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--verde);border:1px solid var(--verde-osc);padding:4px 10px;background:#000a}
+.portada h1{font:400 clamp(30px,6vw,60px)/1.05 "Special Elite",monospace;margin:18px 0 8px;text-shadow:0 2px 18px #000}
+.portada p{color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0 auto;max-width:600px}
+.ficha-rep{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.ficha-rep div{background:#000c;border:1px solid var(--borde);padding:8px 14px;font:13px "Roboto Mono",monospace;color:var(--suave)}
+.ficha-rep b{display:block;color:var(--texto);font-size:17px}
+.bajar{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;font:12px "Roboto Mono",monospace;color:var(--suave);letter-spacing:.2em;animation:latido 2s infinite}
+@keyframes latido{50%{opacity:.3}}
+
+/* escenas: cada sección abre con una imagen a pantalla ancha */
+.escena{position:relative;min-height:62vh;display:flex;align-items:flex-end;background:center/cover no-repeat;background-attachment:fixed}
+.escena::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,10,.25) 0%,rgba(11,12,10,.35) 50%,var(--negro) 100%)}
+@media (max-width:900px){.escena{background-attachment:scroll;min-height:48vh}}
+.escena .titulo{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 16px 26px}
+.num{font:600 13px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.2em}
+.escena h2{font:400 clamp(34px,6vw,64px)/1 "Special Elite",monospace;margin:6px 0 6px;text-shadow:0 2px 14px #000}
+.escena .bajada{max-width:640px;color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0}
+
+.bloque{max-width:1100px;margin:0 auto;padding:10px 16px 70px}
+
+/* papel de expediente */
+.expediente{position:relative;background:var(--papel);border:1px solid var(--borde);padding:22px;margin:18px 0}
+.expediente::before{content:attr(data-sello);position:absolute;top:14px;right:16px;font:400 13px "Special Elite",monospace;color:var(--sello);border:2px solid var(--sello);padding:2px 8px;transform:rotate(4deg);opacity:.85;letter-spacing:.1em}
+.expediente h3{font:400 24px "Special Elite",monospace;margin:0 0 12px;padding-right:120px}
+
+/* línea de ruta */
+.ruta{position:relative;margin:24px 0 0;padding-left:34px}
+.ruta::before{content:"";position:absolute;left:12px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--verde),var(--verde-osc) 60%,transparent)}
+.paso{position:relative;margin:0 0 16px;background:var(--papel);border:1px solid var(--borde);padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.paso::before{content:"";position:absolute;left:-28px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--negro);border:2px solid var(--verde)}
+.paso.ahora{border-color:var(--verde);box-shadow:0 0 0 1px var(--verde-osc),0 0 30px #9fe87022}
+.paso.ahora::before{background:var(--verde);box-shadow:0 0 12px var(--verde)}
+.paso .nv{font:600 12px "Roboto Mono",monospace;color:var(--suave);text-align:center;min-width:64px}
+.paso .nv b{display:block;font:400 30px "Special Elite",monospace;color:var(--texto)}
+.paso h4{margin:0 0 4px;font:700 18px Barlow,sans-serif}
+.paso p{margin:0;color:var(--suave);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--papel2);border:1px solid var(--borde);padding:3px 9px 3px 4px;font:600 13px "Roboto Mono",monospace}
+.chip img{width:24px;height:24px}
+.chip.sin{padding-left:9px}
+
+/* tablas */
+.tabla{width:100%;border-collapse:collapse;font-size:15px}
+.tabla th{font:600 11px "Roboto Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);text-align:left;padding:8px;border-bottom:1px solid var(--borde)}
+.tabla td{padding:10px 8px;border-bottom:1px solid #22261f;vertical-align:middle}
+.tabla tr:last-child td{border-bottom:0}
+.item{display:flex;align-items:center;gap:10px;font-weight:700}
+.item img{width:40px;height:40px;flex:none}
+.item small{display:block;font:400 12px "Roboto Mono",monospace;color:var(--suave)}
+.primera{color:var(--verde);font-weight:700}
+.envuelve{overflow-x:auto}
+
+/* artefactos */
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:18px}
+.rig{position:relative;background:var(--papel);border:1px solid var(--borde);padding:16px;transition:transform .2s,border-color .2s}
+.rig:hover{transform:translateY(-3px);border-color:var(--verde-osc)}
+.rig .cab{display:flex;gap:12px;align-items:center;margin-bottom:10px;padding-right:50px}
+.rig .cab img{width:64px;height:64px}
+.rig h4{margin:0;font:400 22px "Special Elite",monospace}
+.rig .en{font:12px "Roboto Mono",monospace;color:var(--suave)}
+.rango{position:absolute;top:12px;right:12px;font:400 26px "Special Elite",monospace;width:42px;height:42px;display:grid;place-items:center;border:2px solid currentColor}
+.rS{color:var(--verde)}.rA{color:var(--ambar)}.rB{color:var(--suave)}
+.rig p{margin:0 0 8px;font-size:15px;color:#c3c7b8}
+.rig .mejoras{font:13px "Roboto Mono",monospace;color:var(--suave)}
+.rig .mejoras b{color:var(--texto)}
+.uso{display:inline-block;font:600 11px "Roboto Mono",monospace;letter-spacing:.1em;padding:2px 7px;margin:0 4px 8px 0;background:var(--verde-osc);color:#e8f6dc}
+.uso.grupo{background:#5a4618;color:#f5e6c0}
+
+/* tres ranuras */
+.ranuras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media (max-width:860px){.ranuras{grid-template-columns:1fr}}
+.ranura{background:var(--papel);border:1px solid var(--borde)}
+.ranura .cab{padding:12px 16px;border-bottom:1px solid var(--borde);display:flex;justify-content:space-between;align-items:baseline;font:600 13px "Roboto Mono",monospace;letter-spacing:.12em}
+.ranura .cab span{color:var(--suave);font-weight:400;letter-spacing:0}
+.amp{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid #22261f}
+.amp:last-child{border-bottom:0}
+.amp img{width:44px;height:44px}
+.amp b{display:block}
+.amp small{color:var(--suave);font-size:13px;line-height:1.3;display:block}
+.amp .lv{font:600 12px "Roboto Mono",monospace;color:var(--suave);text-align:right}
+.amp.top{background:linear-gradient(90deg,#9fe87014,transparent)}
+.amp.top b{color:var(--verde)}
+
+/* recetas */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media (max-width:860px){.cats{grid-template-columns:1fr}}
+.cat{background:var(--papel);border:1px solid var(--borde);padding:16px}
+.cat h4{margin:0 0 4px;font:400 22px "Special Elite",monospace}
+.cat .nota{font:12px "Roboto Mono",monospace;color:var(--suave);margin:0 0 10px}
+.cat ol{margin:0;padding-left:26px}
+.cat li{margin:0 0 7px}
+.cat li small{display:block;color:var(--suave);font-size:13px;line-height:1.3}
+.cat li::marker{font:600 13px "Roboto Mono",monospace;color:var(--verde)}
+
+/* consejos en la prueba */
+.consejos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:18px}
+.consejo{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start;background:var(--papel);border:1px solid var(--borde);padding:14px}
+.consejo img{width:56px;height:56px;object-fit:cover;border:1px solid var(--borde)}
+.consejo b{display:block;margin-bottom:2px}
+.consejo span{color:#c3c7b8;font-size:15px}
+
+/* villanos */
+.villanos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0}
+.villanos figure{margin:0;position:relative;aspect-ratio:16/10;overflow:hidden}
+.villanos img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.05);transition:transform .6s,filter .6s}
+.villanos figure:hover img{transform:scale(1.06);filter:none}
+.villanos figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 10px;background:linear-gradient(transparent,#000d);font:400 18px "Special Elite",monospace}
+@media (max-width:700px){.villanos{grid-template-columns:1fr}}
+
+.aviso-sc{font:13px "Roboto Mono",monospace;color:var(--suave);border-left:3px solid var(--ambar);padding:6px 12px;margin:14px 0}
+footer{background:linear-gradient(var(--negro),#000), url(img/escenas/steam-fondo-pagina.jpg) center/cover;padding:50px 16px 60px}
+footer .bloque{padding-bottom:0}
+footer h2{font:400 32px "Special Elite",monospace;margin:0 0 12px}
+footer ul{padding-left:18px;color:var(--suave);font-size:14px}
+footer li{margin-bottom:6px}
+
+/* aparición al hacer scroll */
+.aparece{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.aparece.visto{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav id="menu">
+  <a href="#ruta">Ruta</a>
+  <a href="#artefactos">Artefactos</a>
+  <a href="#amplificadores">Amplificadores</a>
+  <a href="#recetas">Recetas</a>
+  <a href="#prueba">En la prueba</a>
+  <a href="#escalada">Escalada</a>
+</nav>
+
+<!-- PORTADA -->
+<header class="portada" id="portada">
+  <div class="oscuro"></div>
+  <div class="contenido">
+    <img class="logo" src="img/escenas/logo.png" alt="The Outlast Trials">
+    <span class="etiqueta">Murkoff · Expediente clasificado</span>
+    <h1>Qué priorizar, reactivo</h1>
+    <p>Lo mejor de cada ranura y en qué orden comprarlo, del nivel 9 al 50. Sin teoría: qué poner primero y qué dejar de opción.</p>
+    <div class="ficha-rep">
+      <div>Reactivo<b>Zentoku</b></div>
+      <div>Nivel de terapia<b>9</b></div>
+      <div>Parche<b>17-sep-2026</b></div>
+      <div>Temporada<b>7.1</b></div>
+    </div>
+  </div>
+  <div class="bajar">▼ BAJA CON CUIDADO</div>
+</header>
+
+<!-- 01 RUTA -->
+<section id="ruta">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-1.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 01</div>
+      <h2>Tu ruta de terapia</h2>
+      <p class="bajada">Todo cuesta <b>2 vales</b> (vouchers), y los vales solo salen al subir de nivel: <b>3 por nivel hasta el 15</b>, 2 hasta el 85 y 1 hasta el 99. No los gastes en lo que no usas.</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="ruta">
+      <div class="paso ahora aparece">
+        <div class="nv">AHORA<b>9</b></div>
+        <div>
+          <h4>Recetas de la categoría 1 (las 7) y el artefacto Stun</h4>
+          <p>La categoría 2 no se abre hasta comprar las 7. Al Stun ponle primero Extended Duration y luego Expanded Radius.</p>
+          <div class="chips"><span class="chip"><img src="img/rigs/stun.png" alt="">Stun</span><span class="chip sin">Recetas cat. 1 · 7/7</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>10</b></div>
+        <div>
+          <h4>Herramienta: Noise Reduction</h4>
+          <p>Haces menos ruido al correr y con las puertas. Opcional: Slippers (silencio al caminar sobre cristales).</p>
+          <div class="chips"><span class="chip"><img src="img/amps/noise-reduction.png" alt="">Noise Reduction</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>15</b></div>
+        <div>
+          <h4>Habilidad: Hide and Heal. Se abre la Escalada</h4>
+          <p>Te escondes y recuperas un tramo de vida. Opcional: Hide and Breathe.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/hide-and-heal.png" alt="">Hide and Heal</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>20</b></div>
+        <div>
+          <h4>Medicina: Double Doses, y empezar la categoría 2</h4>
+          <p>Es de relleno hasta el 35. Recetas: Expanded Inventory → Speed Boost → Endurance.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/double-doses.png" alt="">Double Doses</span><span class="chip sin">Expanded Inventory</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>30</b></div>
+        <div>
+          <h4>Se abre la Invasión</h4>
+          <p>Los químicos de impostores (0/11) solo sirven si juegas de impostor. Si no, no compres ninguno.</p>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>35</b></div>
+        <div>
+          <h4>Medicina: Last Chance</h4>
+          <p>Un golpe que te mataría te deja a 1 de vida, una vez cada 5 min.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/last-chance.png" alt="">Last Chance</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>40</b></div>
+        <div>
+          <h4>Herramienta: Backpack, y pasarte al Jammer con Pacemaker</h4>
+          <p>Backpack te da +1 hueco. Pacemaker: te revives solo una vez por prueba y una vez revives a un aliado a distancia.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/backpack.png" alt="">Backpack</span><span class="chip"><img src="img/rigs/jammer.png" alt="">Jammer · Pacemaker</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>45</b></div>
+        <div>
+          <h4>Habilidad: Smash</h4>
+          <p>Rompes puertas y tablones de un golpe, y abres solo las puertas de dos personas.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/smash.png" alt="">Smash</span></div>
+        </div>
+      </div>
+      <div class="paso aparece">
+        <div class="nv">NIVEL<b>50</b></div>
+        <div>
+          <h4>Medicina: Boosted, y luego la categoría 3</h4>
+          <p>Empiezas con un potenciador de vida, aguante o batería. Recetas: Stamina Recovery → Revitalize → Resistance.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/boosted.png" alt="">Boosted</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="aviso-sc">XP fija por prueba: <b>Estándar 500 · Intensiva 1.500 · Psicocirugía 3.000</b> (×6). La nota también cuenta.</p>
+  </div>
+</section>
+
+<!-- 02 ARTEFACTOS -->
+<section id="artefactos">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-3.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 02</div>
+      <h2>Artefactos</h2>
+      <p class="bajada">Se compran a Noakes. Hay 6, y el artefacto y cada mejora cuestan 2 vales. Primero compra las mejoras de la línea «Primero».</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="rejilla">
+      <article class="rig aparece">
+        <div class="rango rS">S</div>
+        <div class="cab"><img src="img/rigs/stun.png" alt=""><div><h4>Stun</h4><div class="en">aturdimiento · 5 s · 200 s de recarga</div></div></div>
+        <span class="uso">1.ª SOLO</span><span class="uso grupo">GRUPO</span>
+        <p>Una granada eléctrica aturde a los enemigos. Es la huida más fiable.</p>
+        <div class="mejoras"><b>Primero:</b> Extended Duration (8 s) → Expanded Radius → Disarm</div>
+      </article>
+      <article class="rig aparece">
+        <div class="rango rS">S</div>
+        <div class="cab"><img src="img/rigs/jammer.png" alt=""><div><h4>Jammer</h4><div class="en">inhibidor · candados, trampas, TV</div></div></div>
+        <span class="uso">SOLO</span><span class="uso grupo">GRUPO</span>
+        <p>Hackea candados, televisores, radios, trampas y persianas. Con Pacemaker es una vida extra.</p>
+        <div class="mejoras"><b>Primero:</b> Pacemaker → Long Distance → Decreased Cooldown</div>
+      </article>
+      <article class="rig aparece">
+        <div class="rango rA">A</div>
+        <div class="cab"><img src="img/rigs/heal.png" alt=""><div><h4>Heal</h4><div class="en">curación · gas 2 s · 180 s</div></div></div>
+        <span class="uso grupo">1.ª GRUPO</span>
+        <p>Un gas que te cura a ti y a quien esté cerca. En grupo basta con uno que lo lleve.</p>
+        <div class="mejoras"><b>Primero:</b> Extended Duration → Detox (quita la psicosis)</div>
+      </article>
+      <article class="rig aparece">
+        <div class="rango rA">A</div>
+        <div class="cab"><img src="img/rigs/barricade.png" alt=""><div><h4>Barricade</h4><div class="en">barricada · 2–3 cargas · 90 s</div></div></div>
+        <span class="uso">SOLO</span>
+        <p>Bloquea puertas. Desde marzo de 2026 tiene cargas y ha mejorado mucho.</p>
+        <div class="mejoras"><b>Primero:</b> Extra Barricade → Quick Installation</div>
+      </article>
+      <article class="rig aparece">
+        <div class="rango rB">B</div>
+        <div class="cab"><img src="img/rigs/x-ray.png" alt=""><div><h4>X-Ray</h4><div class="en">rayos X · se activa y desactiva</div></div></div>
+        <p>Ves a los enemigos a través de las paredes. Desde marzo de 2026 se enciende y apaga como la visión nocturna.</p>
+        <div class="mejoras"><b>Primero:</b> Recon → Increased Capacity</div>
+      </article>
+      <article class="rig aparece">
+        <div class="rango rB">B</div>
+        <div class="cab"><img src="img/rigs/blind.png" alt=""><div><h4>Blind</h4><div class="en">ceguera · mina de humo · 15 s</div></div></div>
+        <p>Una mina de humo que ciega a los enemigos. Tarda 4 s en colocarse, demasiado para una huida.</p>
+        <div class="mejoras"><b>Primero:</b> Deploy Technique → Extended Duration</div>
+      </article>
+    </div>
+    <p class="aviso-sc">Rangos según GameRant (29-jul-2026) y FandomWire (9-oct-2026): coinciden en que Stun y Jammer son lo más fuerte. Los nombres en español son los más probables; las mejoras van en inglés hasta confirmarlas en tu juego.</p>
+  </div>
+</section>
+
+<!-- 03 AMPLIFICADORES -->
+<section id="amplificadores">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-8.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 03</div>
+      <h2>Amplificadores</h2>
+      <p class="bajada">Se compran a Dorris por 2 vales. Llevas uno por ranura, y cada ranura se abre en el nivel que pone en tu menú.</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="ranuras">
+      <div class="ranura aparece">
+        <div class="cab">🔧 HERRAMIENTA <span>nivel 10</span></div>
+        <div class="amp top"><img src="img/amps/noise-reduction.png" alt=""><div><b>Noise Reduction</b><small>1.ª opción: menos ruido al correr y con las puertas</small></div><div class="lv">10</div></div>
+        <div class="amp top"><img src="img/amps/backpack.png" alt=""><div><b>Backpack</b><small>la sustituye desde el 40: +1 hueco</small></div><div class="lv">40</div></div>
+        <div class="amp"><img src="img/amps/slippers.png" alt=""><div><b>Slippers</b><small>opcional: no haces ruido al caminar sobre cristales</small></div><div class="lv">10</div></div>
+      </div>
+      <div class="ranura aparece">
+        <div class="cab">✊ HABILIDAD <span>nivel 15</span></div>
+        <div class="amp top"><img src="img/amps/hide-and-heal.png" alt=""><div><b>Hide and Heal</b><small>1.ª opción hasta el 45: +1 tramo de vida al esconderte</small></div><div class="lv">15</div></div>
+        <div class="amp top"><img src="img/amps/smash.png" alt=""><div><b>Smash</b><small>desde el 45: rompes puertas de un golpe</small></div><div class="lv">45</div></div>
+        <div class="amp"><img src="img/amps/evasive-maneuver.png" alt=""><div><b>Evasive Maneuver</b><small>opcional (Escalada): te sueltas de un agarre al instante</small></div><div class="lv">45</div></div>
+        <div class="amp"><img src="img/amps/hide-and-breathe.png" alt=""><div><b>Hide and Breathe</b><small>opcional: aguante y adrenalina al esconderte</small></div><div class="lv">15</div></div>
+      </div>
+      <div class="ranura aparece">
+        <div class="cab">✚ MEDICINA <span>nivel 20</span></div>
+        <div class="amp"><img src="img/amps/double-doses.png" alt=""><div><b>Double Doses</b><small>relleno: las jeringas tienen 2 usos</small></div><div class="lv">20</div></div>
+        <div class="amp top"><img src="img/amps/last-chance.png" alt=""><div><b>Last Chance</b><small>1.ª opción desde el 35: te quedas a 1 de vida en vez de morir</small></div><div class="lv">35</div></div>
+        <div class="amp top"><img src="img/amps/boosted.png" alt=""><div><b>Boosted</b><small>desde el 50, en pruebas normales: empiezas con un potenciador</small></div><div class="lv">50</div></div>
+        <div class="amp"><img src="img/amps/self-revive.png" alt=""><div><b>Self Revive</b><small>opcional: te revives solo una vez por prueba</small></div><div class="lv">50</div></div>
+      </div>
+    </div>
+    <p class="aviso-sc">Los mejores (rango S de GameRant): <b>Noise Reduction, Smash, Last Chance y Boosted</b>.</p>
+  </div>
+</section>
+
+<!-- 04 RECETAS -->
+<section id="recetas">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-5.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 04</div>
+      <h2>Recetas de Barlow</h2>
+      <p class="bajada">Son 23 recetas de reactivos a 2 vales cada una. Tu menú lo dice: «Completa la categoría 1 primero», así que el orden solo decide qué tienes antes.</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="cats">
+      <div class="cat aparece">
+        <h4>Categoría 1</h4>
+        <p class="nota">7 recetas · 14 vales · LA TUYA AHORA</p>
+        <ol>
+          <li><b>Self Defense Technique</b><small>te sueltas de un Pouncer con un ladrillo o una botella</small></li>
+          <li><b>Run and Smash Doors</b><small>abres las puertas corriendo</small></li>
+          <li><b>Instant Use</b><small>usas el objeto al recogerlo</small></li>
+          <li><b>Slide</b><small>te deslizas</small></li>
+          <li><b>Regeneration</b><small>regeneras 1 tramo de vida</small></li>
+          <li><b>Hard Kick</b><small>ayudas a un aliado agarrado sin agotarte (en grupo, más arriba)</small></li>
+          <li><b>Stay of Execution</b><small>salvas a un aliado de una ejecución (en grupo, más arriba)</small></li>
+        </ol>
+      </div>
+      <div class="cat aparece">
+        <h4>Categoría 2</h4>
+        <p class="nota">9 recetas · 18 vales</p>
+        <ol>
+          <li><b>Expanded Inventory</b><small>+1 hueco</small></li>
+          <li><b>Speed Boost</b></li>
+          <li><b>Endurance</b></li>
+          <li><b>Battery Extension</b></li>
+          <li><b>Athlete</b></li>
+          <li><b>Doors Basher · Breaching Technique · Heavy Training</b><small>cualquier orden</small></li>
+          <li><b>Gymnast</b><small>la última</small></li>
+        </ol>
+      </div>
+      <div class="cat aparece">
+        <h4>Categoría 3</h4>
+        <p class="nota">7 recetas · 14 vales</p>
+        <ol>
+          <li><b>Stamina Recovery</b></li>
+          <li><b>Revitalize</b><small>vida completa al revivir o al reaparecer en solitario</small></li>
+          <li><b>Resistance</b></li>
+          <li><b>Medic</b><small>en grupo, la primera</small></li>
+          <li><b>Advanced Regeneration · Deep Breaths · Anti-Ambush</b><small>las últimas</small></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 EN LA PRUEBA -->
+<section id="prueba">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-7.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 05</div>
+      <h2>Dentro de la prueba</h2>
+      <p class="bajada">Qué llevar y cuándo gastarlo.</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="consejos">
+      <div class="consejo aparece"><img src="img/objetos/antidoto.png" alt=""><div><b>Lleva siempre un antídoto</b><span>Quita la psicosis. Ocupa poco y te saca de los peores momentos.</span></div></div>
+      <div class="consejo aparece"><img src="img/objetos/ladrillo.png" alt=""><div><b>Un ladrillo o una botella en la mano</b><span>Con Self Defense Technique te sueltan de un agarre. También rompen las minas de gas.</span></div></div>
+      <div class="consejo aparece"><img src="img/rigs/stun.png" alt="" style="object-fit:contain;background:#000"><div><b>Lanza primero, aturde después</b><span>Si golpeas a un enemigo aturdido, se le pasa el aturdimiento. Primero el ladrillo, luego el Stun.</span></div></div>
+      <div class="consejo aparece"><img src="img/objetos/bateria.png" alt=""><div><b>Guarda algo para el final</b><span>El tren tarda unos 10 s en llegar. Ten listo el artefacto o algo para lanzar.</span></div></div>
+      <div class="consejo aparece"><img src="img/objetos/adrenalina.png" alt=""><div><b>Gasta lo que te sobre antes de salir</b><span>Las pilas, la adrenalina y las cargas del artefacto suben la nota y la XP.</span></div></div>
+      <div class="consejo aparece"><img src="img/objetos/ganzua.png" alt=""><div><b>Psicocirugía en cuanto puedas</b><span>Da 3.000 XP fija contra 500 en Estándar. Es la forma más rápida de llegar a los amplificadores buenos.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VILLANOS -->
+<div class="villanos">
+  <figure><img src="img/escenas/mother-gooseberry.jpg" alt="Mother Gooseberry" loading="lazy"><figcaption>Mother Gooseberry</figcaption></figure>
+  <figure><img src="img/escenas/leland-coyle.jpg" alt="Leland Coyle" loading="lazy"><figcaption>Leland Coyle</figcaption></figure>
+  <figure><img src="img/escenas/franco-barbi.jpg" alt="Franco Barbi" loading="lazy"><figcaption>Franco Barbi</figcaption></figure>
+</div>
+
+<!-- 06 ESCALADA -->
+<section id="escalada">
+  <div class="escena" style="background-image:url(img/escenas/steam-captura-4.jpg)">
+    <div class="titulo">
+      <div class="num">EXPEDIENTE 06</div>
+      <h2>Escalada y recaída</h2>
+      <p class="bajada">Para más adelante: así sabrás qué te espera.</p>
+    </div>
+  </div>
+  <div class="bloque">
+    <div class="expediente aparece" data-sello="NIVEL 15+">
+      <h3>Escalada (Escalation Therapy 2.0)</h3>
+      <div class="envuelve"><table class="tabla">
+        <tr><th>Qué</th><th>1.ª opción</th><th>Opcional</th></tr>
+        <tr><td>Tu equipo</td><td colspan="2">No cuenta. El artefacto, los amplificadores y las recetas se eligen durante la partida entre 3 al azar.</td></tr>
+        <tr><td>Artefacto</td><td class="primera">Jammer con Pacemaker</td><td>Stun</td></tr>
+        <tr><td>Medicina</td><td class="primera">Last Chance o Self Revive</td><td>Boosted no en solitario: se puede repetir y solo usas uno</td></tr>
+        <tr><td>Habilidad</td><td class="primera">Evasive Maneuver</td><td>Smash</td></tr>
+        <tr><td>Siempre</td><td colspan="2">Haz el objetivo secundario y mira las variantes antes de correr: con No Running, correr te electrocuta.</td></tr>
+        <tr><td>Semanal</td><td colspan="2">Se renueva los martes a las 10:00 ET: 9:00 en Bogotá hasta el 31-oct, 10:00 de noviembre a marzo.</td></tr>
+      </table></div>
+    </div>
+    <div class="expediente aparece" data-sello="NIVEL 99">
+      <h3>Recaída (Relapse)</h3>
+      <div class="envuelve"><table class="tabla">
+        <tr><th>Qué</th><th>Dato</th></tr>
+        <tr><td>Qué hace</td><td>Vuelves del 99 al 1 y se bloquea todo lo que no hayas dejado fijo.</td></tr>
+        <tr><td>Qué ganas</td><td>1 ficha permanente por recaída: deja fijo un artefacto, una mejora, una receta o un amplificador.</td></tr>
+        <tr><td>Qué fijar primero</td><td class="primera">Lo que más uses: Stun o Jammer, o la receta Expanded Inventory</td></tr>
+        <tr><td>Qué conservas</td><td>Los cosméticos, las estadísticas, las monedas (menos los vales) y la partida de Escalada.</td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="bloque">
+    <h2>Fuentes</h2>
+    <ul>
+      <li>Red Barrels, hotfix del 17-sep-2026 (es el último parche): redbarrelsgames.com/support/hotfix-sept-17/</li>
+      <li>Red Barrels, notas de Chemical Leak (Temporada 7.1, 8-sep-2026): redbarrelsgames.com/support/chemicalleak2026_patchnotes/</li>
+      <li>Red Barrels, notas de Project Boneyard (Temporada 7, 14-jul-2026): redbarrelsgames.com/support/s7_projectboneyard-patchnotes/</li>
+      <li>Red Barrels, notas de Project Judas (cambios del X-Ray y la Barricade, 24-mar-2026): redbarrelsgames.com/news/project-judas-patchnotes/</li>
+      <li>Wiki de Fandom, páginas Rigs, Amps, Prescriptions, Escalation y Relapse Initiative (consultadas el 19-oct-2026): outlast.fandom.com</li>
+      <li>GameRant, rangos de artefactos y de amplificadores (29-jul-2026)</li>
+      <li>FandomWire, artefactos ordenados (9-oct-2026)</li>
+      <li>Nombres en español: tus capturas (Artefacto, Herramienta, Habilidad, Medicina, Recetas de reactivos, Invasión) y una guía de Steam en español</li>
+      <li>Imágenes: Steam (app 1304930) y la wiki de Fandom. © Red Barrels</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+// linterna en la portada
+const portada=document.getElementById('portada');
+const mover=(x,y)=>{const r=portada.getBoundingClientRect();portada.style.setProperty('--x',(x-r.left)+'px');portada.style.setProperty('--y',(y-r.top)+'px');};
+portada.addEventListener('pointermove',e=>mover(e.clientX,e.clientY));
+portada.addEventListener('touchmove',e=>{const t=e.touches[0];mover(t.clientX,t.clientY);},{passive:true});
+// la linterna sola se mueve un poco cuando no hay ratón
+let t0=performance.now(),quieto=true;
+portada.addEventListener('pointermove',()=>quieto=false,{once:true});
+(function vagar(t){if(!quieto)return;const r=portada.getBoundingClientRect();
+  portada.style.setProperty('--x',(r.width/2+Math.sin((t-t0)/1400)*r.width*.18)+'px');
+  portada.style.setProperty('--y',(r.height*.45+Math.cos((t-t0)/1900)*r.height*.08)+'px');
+  requestAnimationFrame(vagar);})(t0);
+// aparición al hacer scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visto');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.aparece').forEach(el=>io.observe(el));
+// menú activo
+const enlaces=[...document.querySelectorAll('#menu a')];
+const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){enlaces.forEach(a=>a.classList.toggle('activo',a.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>io2.observe(s));
+</script>
+</body>
+</html>
