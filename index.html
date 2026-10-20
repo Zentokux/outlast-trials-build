@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Expediente Outlast Trials</title>
-<meta name="description" content="Qué comprar y en qué orden en The Outlast Trials: artefactos, amplificadores, recetas y ruta por nivel de terapia (parche 17-sep-2026, Temporada 7.1).">
+<meta name="description" content="Guía progresiva del nivel 1 al 99 en The Outlast Trials: en qué gastar los vales en Noakes, Dorris y Barlow con enfoque en Curación, Aturdimiento y supervivencia (parche 17-sep-2026, Temporada 7.1).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Roboto+Mono:wght@400;600&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,8 @@
 :root{
   --negro:#0b0c0a; --papel:#151713; --papel2:#1d201a; --borde:#2e3229;
   --texto:#d9dccf; --suave:#9aa08d; --verde:#9fe870; --verde-osc:#3e5a2a;
-  --rojo:#c8312b; --ambar:#e0b44c; --sello:#b8322b;
+  --rojo:#c8312b; --ambar:#e0b44c; --sello:#b8322b; --azul:#8fb7e8;
+  --cur:#9fe870; --atu:#8fb7e8; --sup:#e0b44c; --otro:#9aa08d;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -34,7 +35,7 @@ nav a{font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;text-transform:
 nav a:hover,nav a.activo{color:var(--verde);border-color:var(--verde-osc);background:#0b0c0acc}
 nav a .n{color:var(--verde);margin-right:5px}
 nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid var(--borde);padding:2px 6px;margin:0 4px;align-self:center;background:#000a;cursor:pointer}
-@media (max-width:700px){nav .q{display:none} nav a{padding:5px 7px;font-size:11px} nav a .t{display:none} nav a .n{margin:0}}
+@media (max-width:700px){nav .q{display:none} nav a{padding:5px 8px;font-size:11px} nav a .t{display:none} nav a .n{margin:0}}
 
 /* vistas */
 .vista{display:none}
@@ -45,11 +46,11 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 /* portada */
 .portada{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#000 url(img/escenas/steam-library-hero.jpg) center/cover}
 .portada .oscuro{position:absolute;inset:0;background:radial-gradient(circle 260px at var(--x,50%) var(--y,45%),transparent 0,rgba(0,0,0,.55) 45%,rgba(0,0,0,.94) 100%)}
-.portada .contenido{position:relative;z-index:2;padding:90px 16px 70px;max-width:860px;width:100%}
-.portada img.logo{width:min(400px,78vw);margin:0 auto 14px;filter:drop-shadow(0 4px 20px #000)}
+.portada .contenido{position:relative;z-index:2;padding:90px 16px 70px;max-width:900px;width:100%}
+.portada img.logo{width:min(380px,76vw);margin:0 auto 14px;filter:drop-shadow(0 4px 20px #000)}
 .etiqueta{display:inline-block;font:600 12px "Roboto Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--verde);border:1px solid var(--verde-osc);padding:4px 10px;background:#000a}
 .portada h1{font:400 clamp(30px,6vw,56px)/1.05 "Special Elite",monospace;margin:16px 0 8px;text-shadow:0 2px 18px #000}
-.portada p{color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0 auto;max-width:620px}
+.portada p{color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0 auto;max-width:640px}
 .bajar{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;font:12px "Roboto Mono",monospace;color:var(--suave);letter-spacing:.15em;white-space:nowrap}
 
 /* ficha editable */
@@ -61,18 +62,31 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .num-in button{width:26px;height:26px;border:1px solid var(--borde);background:var(--papel2);cursor:pointer;font-weight:700}
 .num-in button:hover{border-color:var(--verde);color:var(--verde)}
 .num-in input{width:46px;background:transparent;border:0;color:var(--texto);font:600 18px "Roboto Mono",monospace;text-align:center}
-.proxima{margin:18px auto 0;max-width:640px;background:#0b1a06d9;border:1px solid var(--verde);padding:12px 16px;text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 0 30px #9fe87022}
+.proxima{margin:18px auto 0;max-width:660px;background:#0b1a06d9;border:1px solid var(--verde);padding:12px 16px;text-align:left;display:flex;gap:12px;align-items:center;box-shadow:0 0 30px #9fe87022}
 .proxima .ico img{width:44px;height:44px}
 .proxima .ico{font:600 14px "Roboto Mono",monospace;color:var(--verde)}
 .proxima small{display:block;font:600 11px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.15em}
 .proxima b{font-size:18px}
 .proxima span{display:block;color:var(--suave);font-size:14px}
 .proxima a{margin-left:auto;font:600 12px "Roboto Mono",monospace;white-space:nowrap}
+@media (max-width:600px){.proxima{flex-wrap:wrap}.proxima a{margin-left:56px}}
+
+/* enfoques */
+.enfoques{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px auto 0;max-width:860px;text-align:left}
+@media (max-width:760px){.enfoques{grid-template-columns:1fr}}
+.enf{background:#000c;border:1px solid var(--borde);border-top:3px solid var(--c);padding:12px 14px;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;align-items:center}
+.enf img{width:44px;height:44px;grid-row:span 2}
+.enf small{font:600 11px "Roboto Mono",monospace;color:var(--c);letter-spacing:.14em}
+.enf b{font:400 20px/1.1 "Special Elite",monospace}
+.enf span{grid-column:1/-1;color:var(--suave);font-size:14px;line-height:1.35;margin-top:4px}
+.enf i{grid-column:1/-1;height:4px;background:#22261f;margin-top:6px;position:relative}
+.enf i::after{content:"";position:absolute;inset:0;width:var(--p,0%);background:var(--c);transition:width .4s}
+.enf em{grid-column:1/-1;font:12px "Roboto Mono",monospace;color:var(--suave);font-style:normal}
 
 /* accesos */
-.accesos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px auto 0;max-width:820px}
+.accesos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px auto 0;max-width:860px}
 @media (max-width:700px){.accesos{grid-template-columns:repeat(2,1fr)}}
-.acceso{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--borde);text-decoration:none;color:var(--texto);background:#000 center/cover}
+.acceso{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border:1px solid var(--borde);text-decoration:none;color:var(--texto);background:#000 center/cover}
 .acceso::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,#000e);transition:background .3s}
 .acceso:hover{border-color:var(--verde)}
 .acceso:hover::after{background:linear-gradient(transparent 0%,#0b1a06cc)}
@@ -86,12 +100,12 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .escena .titulo{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:70px 16px 22px}
 .num{font:600 13px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.2em}
 .escena h2{font:400 clamp(32px,6vw,58px)/1 "Special Elite",monospace;margin:6px 0 6px;text-shadow:0 2px 14px #000}
-.escena .bajada{max-width:680px;color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0}
+.escena .bajada{max-width:700px;color:#cfd3c4;text-shadow:0 1px 8px #000;margin:0}
 .bloque{max-width:1100px;margin:0 auto;padding:10px 16px 40px}
 
 /* controles */
 .barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 16px}
-.seg{display:inline-flex;border:1px solid var(--borde)}
+.seg{display:inline-flex;border:1px solid var(--borde);flex-wrap:wrap}
 .seg button{background:var(--papel);border:0;padding:8px 14px;cursor:pointer;font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;color:var(--suave)}
 .seg button+button{border-left:1px solid var(--borde)}
 .seg button.on{background:var(--verde-osc);color:#eaf7dd}
@@ -101,83 +115,115 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .chk:checked{border-color:var(--verde);background:var(--verde)}
 .chk:checked::after{content:"✓";color:#0b0c0a;font-weight:700;font-size:15px}
 .chk:disabled{opacity:.3;cursor:not-allowed}
+.tag{font:600 10px "Roboto Mono",monospace;letter-spacing:.08em;padding:2px 6px;border:1px solid var(--borde);color:var(--suave);text-transform:uppercase;white-space:nowrap}
+.tag.e-cur{border-color:var(--cur);color:var(--cur)}.tag.e-atu{border-color:var(--atu);color:var(--atu)}.tag.e-sup{border-color:var(--sup);color:var(--sup)}
+.hito{font:600 12px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.15em;margin:18px 0 8px}
 
-/* lista de compras */
+/* resumen */
 .resumen{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 @media (max-width:700px){.resumen{grid-template-columns:repeat(2,1fr)}}
 .resumen div{background:var(--papel);border:1px solid var(--borde);padding:10px 12px;font:12px "Roboto Mono",monospace;color:var(--suave)}
 .resumen b{display:block;font:400 26px "Special Elite",monospace;color:var(--texto)}
 .resumen .verde b{color:var(--verde)}
-.compra{display:grid;grid-template-columns:28px 40px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--borde);background:var(--papel);margin-bottom:6px;transition:opacity .2s,border-color .2s}
+
+/* línea 1 → 99 */
+.linea{position:relative;margin:6px 0 22px;padding-top:26px}
+.linea .tramos{display:flex;height:34px;border:1px solid var(--borde)}
+.linea .tramos button{position:relative;border:0;border-right:1px solid var(--borde);background:var(--papel);cursor:pointer;font:600 11px "Roboto Mono",monospace;color:var(--suave);padding:0;min-width:0;overflow:hidden}
+.linea .tramos button:last-child{border-right:0}
+.linea .tramos button.hecha{background:#1b2a12;color:var(--verde)}
+.linea .tramos button.actual{background:var(--verde-osc);color:#eaf7dd}
+.linea .tramos button:hover{outline:1px solid var(--verde);outline-offset:-1px}
+.linea .marca{position:absolute;top:0;transform:translateX(-50%);font:600 11px "Roboto Mono",monospace;color:var(--verde);white-space:nowrap;transition:left .4s}
+.linea .marca::after{content:"";display:block;width:2px;height:44px;background:var(--verde);margin:2px auto 0;box-shadow:0 0 8px var(--verde)}
+.linea .extremos{position:relative;height:16px;font:11px "Roboto Mono",monospace;color:var(--suave);margin-top:4px}
+.linea .extremos span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.linea .extremos span:first-child{transform:none}.linea .extremos span:last-child{transform:translateX(-100%)}
+
+/* etapas */
+.etapa{border:1px solid var(--borde);background:var(--papel);margin-bottom:12px;scroll-margin-top:70px}
+.etapa.actual{border-color:var(--verde);box-shadow:0 0 26px #9fe87018}
+.etapa .cab{position:relative;display:block;width:100%;text-align:left;border:0;padding:0;cursor:pointer;background:#000 center/cover;min-height:150px}
+.etapa .cab::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b0c0af2 0%,#0b0c0acc 45%,#0b0c0a55 100%)}
+.etapa .cab > div{position:relative;z-index:2;padding:18px 18px 16px;max-width:760px}
+.etapa .cab small{display:block;font:600 12px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.16em}
+.etapa .cab h3{margin:4px 0 4px;font:400 clamp(24px,4vw,34px)/1.05 "Special Elite",monospace}
+.etapa .cab p{margin:0 0 10px;color:#cfd3c4;font-size:15px}
+.etapa .chips{display:flex;gap:6px;flex-wrap:wrap}
+.etapa .chips span{font:600 11px "Roboto Mono",monospace;letter-spacing:.06em;padding:3px 8px;background:#000b;border:1px solid var(--borde)}
+.etapa .chips span.ok{border-color:var(--verde);color:var(--verde)}
+.etapa .flecha{position:absolute;z-index:2;right:16px;top:16px;font:600 12px "Roboto Mono",monospace;color:var(--suave)}
+.etapa .cuerpo{display:none;padding:14px 16px 16px}
+.etapa.abierta .cuerpo{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+@media (max-width:860px){.etapa.abierta .cuerpo{grid-template-columns:1fr}}
+.compra{display:grid;grid-template-columns:24px 40px 1fr auto;gap:10px;align-items:center;padding:9px 10px;border:1px solid #22261f;background:var(--papel2);margin-bottom:6px;border-left:3px solid var(--c,var(--borde));transition:opacity .2s}
 .compra .ico{width:40px;height:40px;display:grid;place-items:center;font:600 13px "Roboto Mono",monospace;color:var(--suave);border:1px solid var(--borde)}
 .compra .ico img{width:40px;height:40px}
-.compra b{display:block}
+.compra b{display:block;font-size:16px}
 .compra small{display:block;color:var(--suave);font-size:14px;line-height:1.3}
 .compra .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.tag{font:600 10px "Roboto Mono",monospace;letter-spacing:.08em;padding:2px 6px;border:1px solid var(--borde);color:var(--suave);text-transform:uppercase}
 .estado{font:600 11px "Roboto Mono",monospace;letter-spacing:.08em;text-align:right;white-space:nowrap}
-.compra.ya{border-color:var(--verde);box-shadow:0 0 18px #9fe87018}
+.compra.ya{border-color:var(--verde);border-left-color:var(--c);box-shadow:0 0 14px #9fe87014}
 .compra.ya .estado{color:var(--verde)}
 .compra.hecho{opacity:.45}
 .compra.hecho b{text-decoration:line-through}
 .compra.nivel .estado,.compra.espera .estado{color:var(--suave)}
 .compra.ahorra .estado{color:var(--ambar)}
-@media (max-width:600px){.compra{grid-template-columns:24px 34px 1fr}.compra .estado{grid-column:3;text-align:left}.compra .ico,.compra .ico img{width:34px;height:34px}}
-.hito{font:600 12px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.15em;margin:18px 0 8px}
+@media (max-width:600px){.compra{grid-template-columns:22px 34px 1fr}.compra .estado{grid-column:3;text-align:left}.compra .ico,.compra .ico img{width:34px;height:34px}}
+.equipo{background:#0d120a;border:1px solid var(--verde-osc);padding:14px;align-self:start}
+.equipo h4{margin:0 0 8px;font:600 12px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.14em}
+.oculta-hechos .compra.hecho{display:none}
 
-/* artefactos */
-.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-items:start}
-.rig{background:var(--papel);border:1px solid var(--borde);padding:16px;transition:border-color .2s}
-.rig.abierto{border-color:var(--verde-osc)}
-.rig .cab{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-.rig .cab img{width:60px;height:60px}
+/* tablas */
+.tabla{width:100%;border-collapse:collapse;font-size:15px}
+.tabla th{font:600 11px "Roboto Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);text-align:left;padding:8px;border-bottom:1px solid var(--borde)}
+.tabla td{padding:9px 8px;border-bottom:1px solid #22261f;vertical-align:top}
+.tabla tr:last-child td{border-bottom:0}
+.primera{color:var(--verde);font-weight:700}
+.envuelve{overflow-x:auto}
+.expediente{position:relative;background:var(--papel);border:1px solid var(--borde);padding:20px}
+.expediente::before{content:attr(data-sello);position:absolute;top:14px;right:16px;font:400 13px "Special Elite",monospace;color:var(--sello);border:2px solid var(--sello);padding:2px 8px;transform:rotate(4deg);opacity:.85}
+.expediente h3{margin:0 0 10px;font:400 24px "Special Elite",monospace;padding-right:110px}
+
+/* tiendas */
+.tienda{display:none}.tienda.on{display:block}
+.tendero{display:flex;gap:14px;align-items:center;background:var(--papel);border:1px solid var(--borde);padding:12px 16px;margin-bottom:14px}
+.tendero b{font:400 22px "Special Elite",monospace}
+.tendero span{display:block;color:var(--suave);font-size:14px}
+.tendero .cuenta{margin-left:auto;text-align:right;font:12px "Roboto Mono",monospace;color:var(--suave)}
+.tendero .cuenta b{display:block;font:400 26px "Special Elite",monospace;color:var(--verde)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;align-items:start}
+.rig{background:var(--papel);border:1px solid var(--borde);border-top:3px solid var(--c);padding:16px}
+.rig .cabr{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.rig .cabr img{width:60px;height:60px}
 .rig h4{margin:0;font:400 23px "Special Elite",monospace}
 .rig .en{font:12px "Roboto Mono",monospace;color:var(--suave)}
 .rig p{margin:0 0 6px;font-size:15px;color:#c3c7b8}
-.rig .por{color:var(--suave);font-size:14px}
-.uso{display:inline-block;font:600 11px "Roboto Mono",monospace;letter-spacing:.1em;padding:2px 7px;margin:0 4px 8px 0;background:var(--verde-osc);color:#e8f6dc}
-.uso.grupo{background:#5a4618;color:#f5e6c0}
-.uso.rango{background:transparent;border:1px solid currentColor;padding:1px 7px}
-.uso.rS{color:var(--verde)}.uso.rA{color:var(--ambar)}.uso.rB{color:var(--suave)}
-.abrir{width:100%;margin-top:8px;padding:9px;background:var(--papel2);border:1px solid var(--borde);cursor:pointer;font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;color:var(--verde)}
-.abrir:hover{border-color:var(--verde)}
-.mejoras{display:none;margin-top:10px}
-.rig.abierto .mejoras{display:block}
+.rig.fuera{opacity:.8}
 .mej{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid #22261f}
 .mej b{display:block;font-size:15px}
 .mej small{color:var(--suave);font-size:13px;line-height:1.3;display:block}
-.prio{font:600 10px "Roboto Mono",monospace;letter-spacing:.08em;padding:2px 6px;white-space:nowrap}
-.prio.ya{background:var(--verde-osc);color:#e8f6dc}.prio.luego{border:1px solid var(--ambar);color:var(--ambar)}.prio.final{border:1px solid var(--borde);color:var(--suave)}
-.rig.oculto{display:none}
-
-/* amplificadores */
-.llevar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-@media (max-width:760px){.llevar{grid-template-columns:1fr}}
-.llevar > div{background:#0b1a06;border:1px solid var(--verde);padding:10px 12px;display:flex;gap:10px;align-items:center}
-.llevar img{width:40px;height:40px}
-.llevar small{display:block;font:600 11px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.12em}
-.llevar .vacio{border-color:var(--borde);background:var(--papel);color:var(--suave)}
-.deslizador{display:flex;align-items:center;gap:12px;flex:1;min-width:240px}
-.deslizador input{flex:1;accent-color:#9fe870}
-.deslizador b{font:400 26px "Special Elite",monospace;min-width:40px}
+.paso{font:600 10px "Roboto Mono",monospace;letter-spacing:.06em;padding:2px 6px;white-space:nowrap;border:1px solid var(--borde);color:var(--suave);text-align:center;line-height:1.4}
+.paso.pronto{border-color:var(--verde);color:var(--verde)}
+.plegar{width:100%;margin-top:8px;padding:9px;background:var(--papel2);border:1px solid var(--borde);cursor:pointer;font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;color:var(--suave)}
+.plegar:hover{border-color:var(--verde);color:var(--verde)}
+.rig .lista{display:block}.rig.cerrado .lista{display:none}
 .ranuras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media (max-width:860px){.ranuras{grid-template-columns:1fr}}
 .ranura{background:var(--papel);border:1px solid var(--borde)}
-.ranura .cab{padding:12px 16px;border-bottom:1px solid var(--borde);display:flex;justify-content:space-between;font:600 13px "Roboto Mono",monospace;letter-spacing:.12em}
-.ranura .cab span{color:var(--suave);font-weight:400;letter-spacing:0}
-.amp{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #22261f;transition:opacity .2s}
+.ranura .cabs{padding:12px 16px;border-bottom:1px solid var(--borde);display:flex;justify-content:space-between;font:600 13px "Roboto Mono",monospace;letter-spacing:.12em}
+.ranura .cabs span{color:var(--suave);font-weight:400;letter-spacing:0}
+.amp{display:grid;grid-template-columns:24px 40px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #22261f;transition:opacity .2s}
 .amp:last-child{border-bottom:0}
 .amp img{width:40px;height:40px}
 .amp b{display:block;font-size:15px}
 .amp small{color:var(--suave);font-size:13px;line-height:1.3;display:block}
 .voto{font:600 10px "Roboto Mono",monospace;letter-spacing:.06em;padding:2px 6px;white-space:nowrap;text-align:center}
-.voto.si{background:var(--verde-osc);color:#e8f6dc}.voto.opc{border:1px solid var(--ambar);color:var(--ambar)}.voto.esc{border:1px solid #8fb7e8;color:#8fb7e8}.voto.no{border:1px solid var(--borde);color:var(--suave)}
-.amp.bloq{opacity:.35}
+.voto.si{background:var(--verde-osc);color:#e8f6dc}.voto.opc{border:1px solid var(--ambar);color:var(--ambar)}.voto.esc{border:1px solid var(--azul);color:var(--azul)}.voto.no{border:1px solid var(--borde);color:var(--suave)}
+.amp.bloq{opacity:.4}
 .amp.bloq img{filter:grayscale(1)}
 .amp.lleva{background:linear-gradient(90deg,#9fe87022,transparent)}
 .amp.lleva b{color:var(--verde)}
-
-/* recetas */
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
 @media (max-width:860px){.cats{grid-template-columns:1fr}}
 .cat{background:var(--papel);border:1px solid var(--borde);padding:14px}
@@ -185,8 +231,7 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .cat .cont{font:12px "Roboto Mono",monospace;color:var(--suave);margin:2px 0 10px}
 .barrita{height:4px;background:#22261f;margin-bottom:10px}
 .barrita i{display:block;height:100%;background:var(--verde);transition:width .3s}
-.rx{display:grid;grid-template-columns:22px 26px 1fr;gap:8px;align-items:start;padding:7px 0;border-top:1px solid #22261f}
-.rx .o{font:600 13px "Roboto Mono",monospace;color:var(--verde);padding-top:2px}
+.rx{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:start;padding:7px 0;border-top:1px solid #22261f}
 .rx b{display:block;font-size:15px}
 .rx small{color:var(--suave);font-size:13px;line-height:1.3;display:block}
 .cat.cerrada .rx{opacity:.35}
@@ -219,21 +264,19 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .quiz .pie{display:flex;justify-content:flex-end;margin-top:12px}
 .quiz .sig{padding:9px 14px;background:var(--verde-osc);border:0;color:#eaf7dd;cursor:pointer;font:600 12px "Roboto Mono",monospace;letter-spacing:.08em}
 
-/* escalada */
+/* final */
 .reloj{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin-bottom:16px}
 .reloj .caja{background:var(--papel);border:1px solid var(--verde-osc);padding:10px 16px;text-align:center;min-width:80px}
 .reloj .caja b{display:block;font:400 34px "Special Elite",monospace;color:var(--verde)}
 .reloj .caja span{font:11px "Roboto Mono",monospace;color:var(--suave);letter-spacing:.12em}
 .reloj .txt{align-self:center;color:var(--suave);font-size:15px;max-width:380px}
 .pestana{display:none}.pestana.on{display:block}
-.expediente{position:relative;background:var(--papel);border:1px solid var(--borde);padding:20px}
-.expediente::before{content:attr(data-sello);position:absolute;top:14px;right:16px;font:400 13px "Special Elite",monospace;color:var(--sello);border:2px solid var(--sello);padding:2px 8px;transform:rotate(4deg);opacity:.85}
-.tabla{width:100%;border-collapse:collapse;font-size:15px}
-.tabla th{font:600 11px "Roboto Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--suave);text-align:left;padding:8px;border-bottom:1px solid var(--borde)}
-.tabla td{padding:10px 8px;border-bottom:1px solid #22261f;vertical-align:top}
-.tabla tr:last-child td{border-bottom:0}
-.primera{color:var(--verde);font-weight:700}
-.envuelve{overflow-x:auto}
+.fichas{counter-reset:f;display:grid;gap:6px}
+.fichas div{display:grid;grid-template-columns:30px 40px 1fr;gap:10px;align-items:center;background:var(--papel2);border:1px solid #22261f;padding:8px 10px}
+.fichas div::before{counter-increment:f;content:counter(f);font:400 22px "Special Elite",monospace;color:var(--ambar);text-align:center}
+.fichas img{width:40px;height:40px}
+.fichas .rxi{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--borde);font:600 13px "Roboto Mono",monospace;color:var(--suave)}
+.fichas small{display:block;color:var(--suave);font-size:14px}
 
 /* villanos y fuentes */
 .villanos{display:grid;grid-template-columns:repeat(3,1fr)}
@@ -269,12 +312,10 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
 <nav id="menu">
   <span class="q" title="Parte anterior">Q</span>
   <a href="#inicio"><span class="n">◉</span><span class="t">Inicio</span></a>
-  <a href="#ruta"><span class="n">01</span><span class="t">Qué comprar</span></a>
-  <a href="#artefactos"><span class="n">02</span><span class="t">Artefactos</span></a>
-  <a href="#amplificadores"><span class="n">03</span><span class="t">Amplificadores</span></a>
-  <a href="#recetas"><span class="n">04</span><span class="t">Recetas</span></a>
-  <a href="#prueba"><span class="n">05</span><span class="t">En la prueba</span></a>
-  <a href="#escalada"><span class="n">06</span><span class="t">Escalada</span></a>
+  <a href="#ruta"><span class="n">01</span><span class="t">Ruta 1 → 99</span></a>
+  <a href="#tiendas"><span class="n">02</span><span class="t">Tiendas</span></a>
+  <a href="#prueba"><span class="n">03</span><span class="t">En la prueba</span></a>
+  <a href="#final"><span class="n">04</span><span class="t">Nivel máximo</span></a>
   <span class="q" title="Parte siguiente">E</span>
 </nav>
 <button id="sonido" type="button" aria-pressed="false"><span class="ondas"><i></i><i></i><i></i></span><span class="txt">SONIDO: NO</span></button>
@@ -285,22 +326,21 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
   <div class="oscuro"></div>
   <div class="contenido">
     <img class="logo" src="img/escenas/logo.png" alt="The Outlast Trials">
-    <span class="etiqueta">Murkoff · Expediente clasificado</span>
-    <h1>Qué comprar, reactivo</h1>
-    <p>Pon tu nivel y tus vales: la guía te dice qué toca comprar, dónde y por qué.</p>
+    <span class="etiqueta">Murkoff · Programa de terapia 1 → 99</span>
+    <h1>Del nivel 1 al 99, reactivo</h1>
+    <p>En qué gastar cada vale, etapa por etapa, hasta tenerlo todo. Pon tu nivel y tus vales y te digo qué toca.</p>
     <div class="ficha">
       <label>Nivel de terapia<div class="num-in"><button type="button" data-paso="nivel:-1">−</button><input id="in-nivel" type="number" min="1" max="99" inputmode="numeric"><button type="button" data-paso="nivel:1">+</button></div></label>
       <label>Vales<div class="num-in"><button type="button" data-paso="vales:-1">−</button><input id="in-vales" type="number" min="0" max="999" inputmode="numeric"><button type="button" data-paso="vales:1">+</button></div></label>
-      <div>Parche<b>17-sep-2026</b></div>
+      <div>Estás en<b id="ver-etapa"></b></div>
     </div>
     <div class="proxima" id="proxima"></div>
+    <div class="enfoques" id="enfoques"></div>
     <div class="accesos">
-      <a class="acceso" href="#ruta" style="background-image:url(img/escenas/steam-captura-1.jpg)"><span><small>01</small>Qué comprar</span></a>
-      <a class="acceso" href="#artefactos" style="background-image:url(img/escenas/steam-captura-3.jpg)"><span><small>02</small>Artefactos</span></a>
-      <a class="acceso" href="#amplificadores" style="background-image:url(img/escenas/steam-captura-8.jpg)"><span><small>03</small>Amplificadores</span></a>
-      <a class="acceso" href="#recetas" style="background-image:url(img/escenas/steam-captura-5.jpg)"><span><small>04</small>Recetas</span></a>
-      <a class="acceso" href="#prueba" style="background-image:url(img/escenas/steam-captura-7.jpg)"><span><small>05</small>En la prueba</span></a>
-      <a class="acceso" href="#escalada" style="background-image:url(img/escenas/steam-captura-4.jpg)"><span><small>06</small>Escalada</span></a>
+      <a class="acceso" href="#ruta" style="background-image:url(img/escenas/steam-fondo-pagina.jpg)"><span><small>01</small>Ruta 1 → 99</span></a>
+      <a class="acceso" href="#tiendas" style="background-image:url(img/escenas/steam-captura-3.jpg)"><span><small>02</small>Tiendas</span></a>
+      <a class="acceso" href="#prueba" style="background-image:url(img/escenas/steam-captura-7.jpg)"><span><small>03</small>En la prueba</span></a>
+      <a class="acceso" href="#final" style="background-image:url(img/escenas/steam-captura-4.jpg)"><span><small>04</small>Nivel máximo</span></a>
     </div>
   </div>
   <div class="bajar">Q / E o ← → para cambiar de parte</div>
@@ -314,9 +354,8 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
   <div class="bloque">
     <h2>Fuentes</h2>
     <ul>
-      <li>Red Barrels: hotfix del 17-sep-2026 (último parche), notas de Chemical Leak (8-sep-2026), Project Boneyard (14-jul-2026) y Project Judas (24-mar-2026).</li>
-      <li>Wiki de Fandom, páginas Rigs, Amps, Prescriptions, Escalation y Relapse Initiative (consultadas el 20-oct-2026): outlast.fandom.com</li>
-      <li>GameRant, rangos de artefactos y amplificadores (29-jul-2026). FandomWire, artefactos ordenados (9-oct-2026).</li>
+      <li>Red Barrels: hotfix del 17-sep-2026 (último parche a 20-oct-2026), notas de Chemical Leak (8-sep-2026), Project Boneyard (14-jul-2026), Project Judas (24-mar-2026) y Project Relapse (22-abr-2025: todo a 2 vales).</li>
+      <li>Wiki de Fandom, páginas Rigs, Amps, Prescriptions, Murkoff Currencies (vales por nivel), Escalation y Relapse Initiative (consultadas el 20-oct-2026): outlast.fandom.com</li>
       <li>Nombres en español: capturas del juego (menús de Noakes y Barlow, 19 y 20-oct-2026).</li>
       <li>Imágenes: Steam (app 1304930) y la wiki de Fandom. © Red Barrels</li>
     </ul>
@@ -324,89 +363,62 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
 </footer>
 </section>
 
-<!-- 01 QUÉ COMPRAR -->
+<!-- 01 RUTA -->
 <section class="vista" id="ruta">
-  <div class="escena" style="background-image:url(img/escenas/steam-captura-1.jpg)">
+  <div class="escena" style="background-image:url(img/escenas/steam-fondo-pagina.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 01</div>
-      <h2>Qué comprar, en orden</h2>
-      <p class="bajada">Todo cuesta <b>2 vales</b>, y los vales solo se ganan al subir de nivel: 3 por nivel hasta el 15, 2 hasta el 85 y 1 hasta el 99. Marca lo que compras: la lista se reordena y te dice qué toca.</p>
+      <h2>Ruta del 1 al 99</h2>
+      <p class="bajada">8 etapas y 98 compras de <b>2 vales</b>. Los vales llegan al subir de nivel: <b>3</b> por nivel hasta el 15, <b>2</b> hasta el 85 y <b>1</b> hasta el 99. Son 196 en total: justo lo que cuesta todo.</p>
     </div>
   </div>
   <div class="bloque">
     <div class="barra">
       <span class="mini">Tu nivel</span><div class="num-in"><button type="button" data-paso="nivel:-1">−</button><input class="espejo-nivel" type="number" min="1" max="99"><button type="button" data-paso="nivel:1">+</button></div>
       <span class="mini">Tus vales</span><div class="num-in"><button type="button" data-paso="vales:-1">−</button><input class="espejo-vales" type="number" min="0" max="999"><button type="button" data-paso="vales:1">+</button></div>
-      <div class="seg" id="filtro-ruta"><button class="on" data-f="pend">Pendiente</button><button data-f="todo">Todo</button></div>
+      <div class="seg" id="filtro-ruta"><button class="on" data-f="pend">Ocultar comprado</button><button data-f="todo">Ver todo</button></div>
     </div>
     <div class="resumen" id="resumen"></div>
-    <div id="lista"></div>
-    <p class="aviso">Al marcar algo como comprado te resto 2 vales (y al desmarcarlo te los devuelvo). Todo se guarda en este navegador.</p>
+    <div class="linea" id="linea"></div>
+    <div id="etapas"></div>
+    <p class="aviso">Colores: <b style="color:var(--cur)">verde</b> = Curación · <b style="color:var(--atu)">azul</b> = Aturdimiento · <b style="color:var(--sup)">ámbar</b> = supervivencia · gris = fuera del enfoque. Al marcar algo te resto 2 vales (al desmarcarlo te los devuelvo). Todo se guarda en este navegador.</p>
   </div>
 </section>
 
-<!-- 02 ARTEFACTOS -->
-<section class="vista" id="artefactos">
+<!-- 02 TIENDAS -->
+<section class="vista" id="tiendas">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-3.jpg)">
     <div class="titulo">
       <div class="num">EXPEDIENTE 02</div>
-      <h2>Artefactos</h2>
-      <p class="bajada">Se compran a <b>Noakes</b>. El artefacto («Activar») cuesta 2 vales y cada una de sus 7 mejoras otros 2: <b>16 vales</b> para tenerlo completo. Solo llevas uno a la vez.</p>
+      <h2>Las tres tiendas</h2>
+      <p class="bajada">Todo lo de cada tienda con su <b>paso</b> en la ruta y el nivel al que te llega. Marca aquí o en la ruta: es la misma lista.</p>
     </div>
   </div>
   <div class="bloque">
-    <div class="barra">
-      <div class="seg" id="filtro-rig"><button class="on" data-f="todos">Todos</button><button data-f="solo">Solitario</button><button data-f="grupo">Grupo</button></div>
-      <span class="mini">Pulsa «Ver mejoras» para el orden exacto de compra.</span>
+    <div class="barra"><div class="seg" id="tabs-tienda"><button class="on" data-t="noakes">Noakes · artefactos</button><button data-t="dorris">Dorris · amplificadores</button><button data-t="barlow">Barlow · recetas</button></div></div>
+    <div class="tienda on" id="t-noakes">
+      <div class="tendero"><img src="img/rigs/heal.png" alt="" width="48" height="48"><div><b>Noakes</b><span>Taller del pabellón. Artefacto («Activar») + 7 mejoras = 16 vales cada uno. Solo llevas uno.</span></div><div class="cuenta" id="cuenta-noakes"></div></div>
+      <div class="rejilla" id="rigs"></div>
     </div>
-    <div class="rejilla" id="rigs"></div>
-    <p class="aviso"><b>YA</b> = cómpralas en cuanto tengas el artefacto · <b>LUEGO</b> = después de lo importante de la lista · <b>AL FINAL</b> = solo si te sobran vales. Rangos según GameRant (29-jul-2026) y FandomWire (9-oct-2026).</p>
+    <div class="tienda" id="t-dorris">
+      <div class="tendero"><img src="img/amps/hide-and-heal.png" alt="" width="48" height="48"><div><b>Dorris</b><span>Cafetería. Uno por ranura: Herramienta (nivel 10, 25, 40), Habilidad (15, 30, 45) y Medicina (20, 35, 50).</span></div><div class="cuenta" id="cuenta-dorris"></div></div>
+      <div class="ranuras" id="ranuras"></div>
+      <p class="aviso"><b>CÓMPRALO</b> = parte del equipo · <b>OPCIONAL</b> = alternativa · <b>ESCALADA</b> = para ese modo · <b>COMPLETAR</b> = solo para tenerlo todo. «← equípalo» sigue tu nivel. Nombres en inglés hasta tener captura de la tienda de Dorris.</p>
+    </div>
+    <div class="tienda" id="t-barlow">
+      <div class="tendero"><img src="img/objetos/icono-botiquin.png" alt="" width="48" height="48"><div><b>Barlow</b><span>Farmacia. 23 recetas: la categoría 2 se abre al comprar las 7 de la 1, y la 3 al comprar las 9 de la 2.</span></div><div class="cuenta" id="cuenta-barlow"></div></div>
+      <div class="cats" id="cats"></div>
+    </div>
   </div>
 </section>
 
-<!-- 03 AMPLIFICADORES -->
-<section class="vista" id="amplificadores">
-  <div class="escena" style="background-image:url(img/escenas/steam-captura-8.jpg)">
-    <div class="titulo">
-      <div class="num">EXPEDIENTE 03</div>
-      <h2>Amplificadores</h2>
-      <p class="bajada">Se compran a <b>Dorris</b> por 2 vales. Llevas <b>uno por ranura</b>: Herramienta (nivel 10), Habilidad (15) y Medicina (20). Mueve tu nivel y verás cuáles tienes abiertos y cuál equipar.</p>
-    </div>
-  </div>
-  <div class="bloque">
-    <div class="barra">
-      <div class="deslizador"><span class="mini">Nivel</span><input type="range" id="rango-nivel" min="1" max="99"><b id="ver-nivel"></b></div>
-      <div class="seg" id="modo-amp"><button class="on" data-m="normal">Pruebas normales</button><button data-m="escalada">Escalada</button></div>
-    </div>
-    <div class="hito">LLEVA AHORA</div>
-    <div class="llevar" id="llevar"></div>
-    <div class="ranuras" id="ranuras"></div>
-    <p class="aviso"><b>CÓMPRALO</b> = forma parte de la ruta · <b>OPCIONAL</b> = vale si te sobran vales · <b>ESCALADA</b> = solo para ese modo · <b>NO HACE FALTA</b> = no gastes vales. Los nombres siguen en inglés hasta tener captura de la tienda de Dorris.</p>
-  </div>
-</section>
-
-<!-- 04 RECETAS -->
-<section class="vista" id="recetas">
-  <div class="escena" style="background-image:url(img/escenas/steam-captura-5.jpg)">
-    <div class="titulo">
-      <div class="num">EXPEDIENTE 04</div>
-      <h2>Recetas de Barlow</h2>
-      <p class="bajada">23 recetas a 2 vales cada una. Como en tu menú: la categoría 2 se abre al completar la 1, y la 3 al completar la 2. Márcalas al comprarlas.</p>
-    </div>
-  </div>
-  <div class="bloque">
-    <div class="cats" id="cats"></div>
-    <p class="aviso">El número es el orden de compra. En grupo, sube Patada firme y Suspensión de ejecución en la categoría 1, y Medicina al principio de la 3.</p>
-  </div>
-</section>
-
-<!-- 05 EN LA PRUEBA -->
+<!-- 03 EN LA PRUEBA -->
 <section class="vista" id="prueba">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-7.jpg)">
     <div class="titulo">
-      <div class="num">EXPEDIENTE 05</div>
+      <div class="num">EXPEDIENTE 03</div>
       <h2>Dentro de la prueba</h2>
-      <p class="bajada">Toca cada carta para ver el consejo. Abajo, ponte a prueba.</p>
+      <p class="bajada">Cómo sacar partido a la Curación y al Aturdimiento. Toca cada carta; abajo, ponte a prueba.</p>
     </div>
   </div>
   <div class="bloque">
@@ -415,41 +427,58 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
   </div>
 </section>
 
-<!-- 06 ESCALADA -->
-<section class="vista" id="escalada">
+<!-- 04 NIVEL MÁXIMO -->
+<section class="vista" id="final">
   <div class="escena" style="background-image:url(img/escenas/steam-captura-4.jpg)">
     <div class="titulo">
-      <div class="num">EXPEDIENTE 06</div>
-      <h2>Escalada y recaída</h2>
-      <p class="bajada">Para más adelante: la Escalada se abre en el nivel 15 y la recaída en el 99.</p>
+      <div class="num">EXPEDIENTE 04</div>
+      <h2>Nivel máximo</h2>
+      <p class="bajada">El equipo final, la Escalada (desde el nivel 15) y la recaída en el 99.</p>
     </div>
   </div>
   <div class="bloque">
-    <div class="hito">PRÓXIMO REINICIO DE LA ESCALADA SEMANAL</div>
-    <div class="reloj" id="reloj"></div>
-    <div class="barra"><div class="seg" id="tabs-esc"><button class="on" data-t="t-esc">Escalada</button><button data-t="t-rec">Recaída</button></div></div>
-    <div class="pestana on" id="t-esc">
-      <div class="expediente" data-sello="NIVEL 15+">
+    <div class="barra"><div class="seg" id="tabs-final"><button class="on" data-t="p-build">Equipo final</button><button data-t="p-esc">Escalada</button><button data-t="p-rec">Recaída</button></div></div>
+    <div class="pestana on" id="p-build">
+      <div class="expediente" data-sello="NIVEL 50+">
+        <h3>Equipo final</h3>
         <div class="envuelve"><table class="tabla">
-          <tr><th>Qué</th><th>1.ª opción</th><th>Opcional</th></tr>
-          <tr><td>Tu equipo</td><td colspan="2">No cuenta: el artefacto, los amplificadores y las recetas se eligen durante la partida entre 3 al azar.</td></tr>
-          <tr><td>Artefacto</td><td class="primera">Interceptor con Pacificador</td><td>Aturdimiento</td></tr>
-          <tr><td>Medicina</td><td class="primera">Last Chance o Self Revive</td><td>Boosted no en solitario: se puede repetir y solo usas uno</td></tr>
-          <tr><td>Habilidad</td><td class="primera">Evasive Maneuver</td><td>Smash</td></tr>
-          <tr><td>Siempre</td><td colspan="2">Haz el objetivo secundario y mira las variantes antes de correr: con No Running, correr te electrocuta.</td></tr>
-          <tr><td>Desde la prueba 11</td><td colspan="2">Siempre hay una variante Ultra.</td></tr>
+          <tr><th>Ranura</th><th>1.ª opción</th><th>Opcional</th></tr>
+          <tr><td>Artefacto</td><td class="primera">Curación (8/8)</td><td>Aturdimiento (8/8) en solitario o dificultad alta</td></tr>
+          <tr><td>Herramienta</td><td class="primera">Backpack</td><td>Short Circuit (las pilas recargan el artefacto)</td></tr>
+          <tr><td>Habilidad</td><td class="primera">Hide and Heal</td><td>Smash</td></tr>
+          <tr><td>Medicina</td><td class="primera">Last Chance</td><td>Boosted</td></tr>
+          <tr><td>Recetas</td><td colspan="2">Las 23 compradas desde el nivel 34: no se equipan, siempre están activas.</td></tr>
         </table></div>
       </div>
     </div>
-    <div class="pestana" id="t-rec">
+    <div class="pestana" id="p-esc">
+      <div class="hito">PRÓXIMO REINICIO DE LA ESCALADA SEMANAL</div>
+      <div class="reloj" id="reloj"></div>
+      <div class="expediente" data-sello="NIVEL 15+">
+        <h3>Escalada</h3>
+        <div class="envuelve"><table class="tabla">
+          <tr><th>Qué</th><th>1.ª opción</th><th>Opcional</th></tr>
+          <tr><td>Tu equipo</td><td colspan="2">No cuenta: el artefacto, los amplificadores y las recetas se eligen durante la partida entre 3 al azar.</td></tr>
+          <tr><td>Artefacto</td><td class="primera">Curación o Aturdimiento</td><td>Interceptor si trae Pacificador</td></tr>
+          <tr><td>Medicina</td><td class="primera">Self Revive o Last Chance</td><td>Double Doses</td></tr>
+          <tr><td>Habilidad</td><td class="primera">Evasive Maneuver</td><td>Hide and Heal</td></tr>
+          <tr><td>Siempre</td><td colspan="2">Haz el objetivo secundario y mira las variantes antes de correr: con No Running, correr te electrocuta.</td></tr>
+          <tr><td>Desde la prueba 11</td><td colspan="2">Siempre hay una variante Ultra.</td></tr>
+          <tr><td>Desde la prueba 21</td><td colspan="2">El daño no se recupera entre pruebas y no hay revividas.</td></tr>
+        </table></div>
+      </div>
+    </div>
+    <div class="pestana" id="p-rec">
       <div class="expediente" data-sello="NIVEL 99">
+        <h3>Recaída</h3>
         <div class="envuelve"><table class="tabla">
           <tr><th>Qué</th><th>Dato</th></tr>
-          <tr><td>Qué hace</td><td>Vuelves del 99 al 1 y se bloquea todo lo que no hayas dejado fijo.</td></tr>
-          <tr><td>Qué ganas</td><td>1 ficha permanente por recaída: deja fijo un artefacto, una mejora, una receta o un amplificador.</td></tr>
-          <tr><td>Qué fijar primero</td><td class="primera">Lo que más uses: Aturdimiento o Interceptor, o la receta Inventario ampliado</td></tr>
-          <tr><td>Qué conservas</td><td>Los cosméticos, las estadísticas, las monedas (menos los vales) y la partida de Escalada.</td></tr>
+          <tr><td>Qué hace</td><td>Vuelves del 99 al 1, pierdes los vales y se bloquea todo lo que no hayas dejado fijo. Puedes decir que no y quedarte en el 99.</td></tr>
+          <tr><td>Qué ganas</td><td>1 ficha permanente por recaída (y un traje la primera vez). La ficha fija un artefacto, una mejora, una receta o un amplificador, sin nivel ni categoría.</td></tr>
+          <tr><td>Qué conservas</td><td>Los cosméticos, las estadísticas, las monedas (menos los vales), la Escalada y las dificultades.</td></tr>
         </table></div>
+        <div class="hito">QUÉ FIJAR CON CADA FICHA</div>
+        <div class="fichas" id="fichas"></div>
       </div>
     </div>
   </div>
@@ -465,12 +494,17 @@ const compradoSet=()=>new Set(Object.keys(E.comprado).filter(k=>E.comprado[k]));
 
 // índice de todo lo que se compra
 const ITEM={};
-ARTEFACTOS.forEach(r=>{ITEM[r.id]={id:r.id,nombre:r.nombre,tipo:'Artefacto',donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png'};
-  r.mejoras.forEach(m=>ITEM[m.id]={id:m.id,nombre:m.nombre,tipo:'Mejora de '+r.nombre,donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',rig:r.id});});
-AMPS.forEach(a=>ITEM[a.id]={id:a.id,nombre:a.nombre,tipo:'Amplificador · '+a.ranura,donde:'Dorris',nivel:a.nivel,icono:'img/amps/'+a.id+'.png'});
-RECETAS.forEach(x=>ITEM[x.id]={id:x.id,nombre:x.nombre,tipo:'Receta · categoría '+x.cat,donde:'Barlow',nivel:1,cat:x.cat});
+ARTEFACTOS.forEach(r=>{ITEM[r.id]={id:r.id,nombre:r.nombre,tipo:'Artefacto',donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',enfoque:r.enfoque};
+  r.mejoras.forEach(m=>ITEM[m.id]={id:m.id,nombre:m.nombre,tipo:'Mejora de '+r.nombre,donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',rig:r.id,enfoque:r.enfoque});});
+AMPS.forEach(a=>ITEM[a.id]={id:a.id,nombre:a.nombre,tipo:'Amplificador · '+a.ranura,donde:'Dorris',nivel:a.nivel,icono:'img/amps/'+a.id+'.png',enfoque:a.enfoque});
+RECETAS.forEach(x=>ITEM[x.id]={id:x.id,nombre:x.nombre,tipo:'Receta · categoría '+x.cat,donde:'Barlow',nivel:1,cat:x.cat,enfoque:x.enfoque});
 const catIds=c=>RECETAS.filter(x=>x.cat===c).map(x=>x.id);
 const catCompleta=(c,set)=>catIds(c).every(id=>set.has(id));
+const etapaDe=L=>ETAPAS.find(e=>L>=e.desde&&L<=e.hasta)||ETAPAS[ETAPAS.length-1];
+
+// paso de la ruta y nivel al que llega cada compra (siguiendo la ruta desde el nivel 1)
+const PASO={};
+(()=>{let L=1;RUTA.forEach(([id,porque],k)=>{const it=ITEM[id];while(valesHasta(L)<2*(k+1)||L<it.nivel)L++;PASO[id]={n:k+1,nivel:L,porque,etapa:etapaDe(L).n};});})();
 
 // ¿qué le falta a un objeto para poder comprarse?
 function bloqueo(it,set){
@@ -479,16 +513,17 @@ function bloqueo(it,set){
   if(it.cat>1&&!catCompleta(it.cat-1,set))return 'Completa la categoría '+(it.cat-1);
   return null;
 }
-// simula la lista con los vales actuales
+// simula la ruta con los vales actuales
 function plan(){
-  const set=compradoSet();let v=E.vales;
-  return COMPRAS.map(([id,porque],i)=>{const it=ITEM[id];let est,txt;
+  const set=compradoSet();let v=E.vales;const r={};
+  RUTA.forEach(([id])=>{const it=ITEM[id];let est,txt;
     if(tiene(id)){est='hecho';txt='COMPRADO';}
     else{const b=bloqueo(it,set);
       if(b){est=b.startsWith('Nivel')?'nivel':'espera';txt=b.toUpperCase();}
       else if(v>=2){est='ya';txt='CÓMPRALO YA';v-=2;set.add(id);}
       else{est='ahorra';txt='FALTAN VALES';}}
-    return {i:i+1,it,porque,est,txt};});
+    r[id]={est,txt};});
+  return r;
 }
 
 function marcar(id,on){
@@ -504,87 +539,95 @@ document.addEventListener('change',e=>{const t=e.target;
   if(t.dataset.compra)marcar(t.dataset.compra,t.checked);});
 
 const icoHTML=it=>it.icono?'<img src="'+it.icono+'" alt="">':'Rx';
+const colorE=e=>'var(--'+(e||'otro')+')';
+const tagE=e=>e==='otro'?'<span class="tag">Al final</span>':'<span class="tag e-'+e+'">'+ENFOQUES[e].n+' · '+ENFOQUES[e].nombre+'</span>';
+const chk=(id,est)=>'<input type="checkbox" class="chk" data-compra="'+id+'" '+(est==='hecho'?'checked':'')+' '+(est==='nivel'||est==='espera'?'disabled':'')+' aria-label="Comprado">';
 
-// ===== portada: próxima compra =====
-function pintarProxima(){
-  const p=plan(),sig=p.find(x=>x.est==='ya')||p.find(x=>x.est!=='hecho');const el=document.getElementById('proxima');
-  if(!sig){el.innerHTML='<div><small>TODO COMPRADO</small><b>Ruta completa</b></div>';return;}
-  const n=p.filter(x=>x.est==='ya').length;
-  el.innerHTML='<div class="ico">'+icoHTML(sig.it)+'</div><div><small>'+(sig.est==='ya'?'TU PRÓXIMA COMPRA':'LO SIGUIENTE · '+sig.txt.toLowerCase())+'</small><b>'+sig.it.nombre+'</b><span>'+sig.it.tipo+' · a '+sig.it.donde+' · '+sig.porque+'</span></div><a href="#ruta">'+(n>1?'+'+(n-1)+' más →':'Ver lista →')+'</a>';
+// ===== portada =====
+function pintarInicio(){
+  const p=plan(),et=etapaDe(E.nivel);
+  document.getElementById('ver-etapa').textContent='Etapa '+et.n+' de 8';
+  const ya=RUTA.filter(([id])=>p[id].est==='ya');
+  const sig=ya[0]||RUTA.find(([id])=>p[id].est!=='hecho');const el=document.getElementById('proxima');
+  if(!sig){el.innerHTML='<div><small>TODO COMPRADO</small><b>98 de 98: ruta completa</b><span>Ya puedes hacer la recaída en el 99.</span></div><a href="#final">Nivel máximo →</a>';}
+  else{const it=ITEM[sig[0]],e=p[sig[0]];
+    el.innerHTML='<div class="ico">'+icoHTML(it)+'</div><div><small>'+(e.est==='ya'?'TU PRÓXIMA COMPRA · PASO '+PASO[it.id].n:'LO SIGUIENTE · '+e.txt.toLowerCase())+'</small><b>'+it.nombre+'</b><span>'+it.tipo+' · a '+it.donde+' · '+sig[1]+'</span></div><a href="#ruta">'+(ya.length>1?'+'+(ya.length-1)+' más →':'Ver ruta →')+'</a>';}
+  document.getElementById('enfoques').innerHTML=['cur','atu','sup'].map(k=>{const f=ENFOQUES[k],ids=RUTA.filter(([id])=>ITEM[id].enfoque===k).map(r=>r[0]),n=ids.filter(tiene).length;
+    return '<div class="enf" style="--c:'+colorE(k)+';--p:'+(n/ids.length*100)+'%"><img src="'+f.icono+'" alt=""><small>PRIORIDAD '+f.n+'</small><b>'+f.nombre+'</b><span>'+f.texto+'</span><i></i><em>'+n+' de '+ids.length+' compras</em></div>';}).join('');
 }
 
-// ===== 01 lista de compras =====
-let filtroRuta='pend';
+// ===== 01 ruta por etapas =====
+let ocultarHechos=true;const etapasAbiertas=new Set();let etapaVista=null;
 function pintarRuta(){
-  const p=plan(),ya=p.filter(x=>x.est==='ya').length,hechos=p.filter(x=>x.est==='hecho').length;
+  const p=plan(),et=etapaDe(E.nivel),hechos=RUTA.filter(([id])=>tiene(id)).length,ya=RUTA.filter(([id])=>p[id].est==='ya').length;
+  if(etapaVista!==et.n){etapasAbiertas.clear();etapasAbiertas.add(et.n);etapaVista=et.n;}
   document.getElementById('resumen').innerHTML=
-    '<div class="verde"><b>'+ya+'</b>puedes comprar ya</div><div><b>'+E.vales+'</b>vales tuyos</div><div><b>'+hechos+'/'+p.length+'</b>comprado</div><div><b>'+(p.length-hechos)*2+'</b>vales para acabar</div>';
-  let html='',ultimoHito='';
-  p.forEach(x=>{ if(filtroRuta==='pend'&&x.est==='hecho')return;
-    const hito=x.it.nivel>1?'NIVEL '+x.it.nivel:'';
-    if(hito&&hito!==ultimoHito){html+='<div class="hito">'+hito+'</div>';ultimoHito=hito;}
-    const bloq=x.est==='nivel'||x.est==='espera';
-    html+='<div class="compra '+x.est+'"><input type="checkbox" class="chk" data-compra="'+x.it.id+'" '+(x.est==='hecho'?'checked':'')+' '+(bloq?'disabled':'')+' aria-label="Comprado"><div class="ico">'+icoHTML(x.it)+'</div><div><b>'+x.i+'. '+x.it.nombre+'</b><small>'+x.porque+'</small><div class="tags"><span class="tag">'+x.it.tipo+'</span><span class="tag">'+x.it.donde+'</span><span class="tag">2 vales</span></div></div><div class="estado">'+x.txt+'</div></div>';});
-  document.getElementById('lista').innerHTML=html||'<p class="mini">Ya lo tienes todo.</p>';
+    '<div class="verde"><b>'+ya+'</b>puedes comprar ya</div><div><b>'+E.vales+'</b>vales tuyos</div><div><b>'+hechos+'/98</b>comprado</div><div><b>'+(196-valesHasta(E.nivel))+'</b>vales por ganar hasta el 99</div>';
+  // línea 1 → 99
+  const pos=L=>((L-1)/98*100);
+  document.getElementById('linea').innerHTML='<div class="marca" style="left:'+pos(E.nivel)+'%">TÚ · '+E.nivel+'</div><div class="tramos">'+ETAPAS.map(e=>{
+    const ids=RUTA.filter(([id])=>PASO[id].etapa===e.n).map(r=>r[0]),lista=ids.every(tiene);
+    return '<button type="button" data-ir="'+e.n+'" class="'+(e.n===et.n?'actual':lista?'hecha':'')+'" style="flex:'+(e.hasta-e.desde+1)+'" title="Etapa '+e.n+': nivel '+e.desde+'–'+e.hasta+'">'+e.n+'</button>';}).join('')+'</div><div class="extremos">'+[1,15,50,85,99].map(L=>'<span style="left:'+pos(L)+'%">'+L+'</span>').join('')+'</div>';
+  // etapas
+  document.getElementById('etapas').innerHTML=ETAPAS.map(e=>{
+    const ids=RUTA.filter(([id])=>PASO[id].etapa===e.n).map(r=>r[0]),n=ids.filter(tiene).length,ab=etapasAbiertas.has(e.n);
+    const gana=valesHasta(e.hasta)-valesHasta(Math.max(1,e.desde-1));
+    const filas=ids.map(id=>{const it=ITEM[id],x=p[id],ps=PASO[id];
+      return '<div class="compra '+x.est+'" style="--c:'+colorE(it.enfoque)+'">'+chk(id,x.est)+'<div class="ico">'+icoHTML(it)+'</div><div><b>'+ps.n+'. '+it.nombre+'</b><small>'+ps.porque+'</small><div class="tags">'+tagE(it.enfoque)+'<span class="tag">'+it.donde+'</span><span class="tag">nivel '+ps.nivel+'</span></div></div><div class="estado">'+x.txt+'</div></div>';}).join('');
+    return '<article class="etapa '+(ab?'abierta ':'')+(e.n===et.n?'actual':'')+'" id="etapa-'+e.n+'">'+
+      '<button class="cab" type="button" data-etapa="'+e.n+'" style="background-image:url(img/escenas/'+e.img+'.jpg)"><div><small>ETAPA '+e.n+' · NIVEL '+e.desde+'–'+e.hasta+(e.n===et.n?' · ESTÁS AQUÍ':'')+'</small><h3>'+e.titulo+'</h3><p>'+e.meta+'</p><div class="chips"><span>+'+gana+' vales</span><span>'+ids.length+' compras</span><span class="'+(n===ids.length?'ok':'')+'">'+n+'/'+ids.length+' hechas</span></div></div><span class="flecha">'+(ab?'▲':'▼')+'</span></button>'+
+      '<div class="cuerpo"><div class="'+(ocultarHechos?'oculta-hechos':'')+'">'+filas+(ocultarHechos&&n===ids.length?'<p class="mini">Etapa completa ✓</p>':'')+'</div>'+
+      '<div class="equipo"><h4>AL TERMINAR LA ETAPA, LLEVA</h4><div class="envuelve"><table class="tabla"><tr><th>Ranura</th><th>1.ª opción</th><th>Opcional</th></tr>'+e.llevar.map(([r,a,b])=>'<tr><td>'+r+'</td><td class="primera">'+a+'</td><td>'+b+'</td></tr>').join('')+'</table></div></div></div></article>';}).join('');
 }
-document.getElementById('filtro-ruta').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filtroRuta=b.dataset.f;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));pintarRuta();});
+document.getElementById('etapas').addEventListener('click',e=>{const b=e.target.closest('[data-etapa]');if(!b)return;const n=+b.dataset.etapa;etapasAbiertas.has(n)?etapasAbiertas.delete(n):etapasAbiertas.add(n);pintarRuta();Amb.cambio();});
+document.getElementById('linea').addEventListener('click',e=>{const b=e.target.closest('[data-ir]');if(!b)return;const n=+b.dataset.ir;etapasAbiertas.add(n);pintarRuta();document.getElementById('etapa-'+n).scrollIntoView({behavior:'smooth'});Amb.cambio();});
+document.getElementById('filtro-ruta').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ocultarHechos=b.dataset.f==='pend';[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));pintarRuta();});
 
-// ===== 02 artefactos =====
-const abiertos=new Set(['aturdimiento']);let filtroRig='todos';
-const PRIO={ya:'YA',luego:'LUEGO',final:'AL FINAL'};
-function pintarRigs(){
+// ===== 02 tiendas =====
+const pasoHTML=id=>{const ps=PASO[id];return '<span class="paso '+(ps.etapa<=3?'pronto':'')+'">PASO '+ps.n+'<br>NIV. '+ps.nivel+'</span>';};
+const cerrados=new Set(ARTEFACTOS.filter(r=>r.enfoque==='otro').map(r=>r.id));
+function pintarNoakes(p){
+  const ids=Object.values(ITEM).filter(i=>i.donde==='Noakes').map(i=>i.id);
+  document.getElementById('cuenta-noakes').innerHTML='<b>'+ids.filter(tiene).length+'/48</b>comprado';
   document.getElementById('rigs').innerHTML=ARTEFACTOS.map(r=>{
-    const n=r.mejoras.filter(m=>tiene(m.id)).length+(tiene(r.id)?1:0);
-    const usos=r.uso.map(u=>'<span class="uso '+(u==='grupo'?'grupo':'')+'">'+(u==='solo'?'SOLITARIO':'GRUPO')+'</span>').join('');
-    const oculto=filtroRig!=='todos'&&!r.uso.includes(filtroRig),ab=abiertos.has(r.id);
-    return '<article class="rig '+(ab?'abierto ':'')+(oculto?'oculto':'')+'" data-rig="'+r.id+'"><div class="cab"><img src="img/rigs/'+r.icono+'.png" alt=""><div><h4>'+r.nombre+'</h4><div class="en">'+r.en+' · tienes '+n+'/8</div></div></div>'+
-      '<span class="uso rango r'+r.rango+'">RANGO '+r.rango+'</span>'+usos+'<p>'+r.resumen+'</p><p class="por">'+r.porque+'</p>'+
-      '<button class="abrir" type="button">'+(ab?'Ocultar mejoras ▲':'Ver mejoras en orden ▼')+'</button><div class="mejoras">'+
-      '<div class="mej"><input type="checkbox" class="chk" data-compra="'+r.id+'" '+(tiene(r.id)?'checked':'')+' aria-label="Comprado"><div><b>Activar</b><small>Compras el artefacto (2 vales).</small></div><span class="prio ya">PRIMERO</span></div>'+
-      r.mejoras.map((m,i)=>'<div class="mej"><input type="checkbox" class="chk" data-compra="'+m.id+'" '+(tiene(m.id)?'checked':'')+' '+(!tiene(r.id)&&!tiene(m.id)?'disabled title="Primero compra el artefacto"':'')+' aria-label="Comprado"><div><b>'+(i+1)+'. '+m.nombre+'</b><small>'+m.efecto+'</small></div><span class="prio '+m.prio+'">'+PRIO[m.prio]+'</span></div>').join('')+
-      '</div></article>';}).join('');
+    const lista=[{id:r.id,nombre:'Activar',efecto:'Compras el artefacto.'},...r.mejoras].sort((a,b)=>PASO[a.id].n-PASO[b.id].n);
+    const n=lista.filter(m=>tiene(m.id)).length,cer=cerrados.has(r.id);
+    return '<article class="rig '+(r.enfoque==='otro'?'fuera ':'')+(cer?'cerrado':'')+'" style="--c:'+colorE(r.enfoque)+'" data-rig="'+r.id+'"><div class="cabr"><img src="img/rigs/'+r.icono+'.png" alt=""><div><h4>'+r.nombre+'</h4><div class="en">'+r.en+' · tienes '+n+'/8</div></div></div>'+
+      tagE(r.enfoque)+'<p style="margin-top:8px">'+r.resumen+'</p>'+
+      '<div class="lista">'+lista.map(m=>'<div class="mej">'+chk(m.id,p[m.id].est)+'<div><b>'+m.nombre+'</b><small>'+m.efecto+'</small></div>'+pasoHTML(m.id)+'</div>').join('')+'</div>'+
+      '<button class="plegar" type="button">'+(cer?'Ver mejoras ▼':'Ocultar ▲')+'</button></article>';}).join('');
 }
-document.getElementById('rigs').addEventListener('click',e=>{const b=e.target.closest('.abrir');if(!b)return;const id=b.closest('.rig').dataset.rig;abiertos.has(id)?abiertos.delete(id):abiertos.add(id);pintarRigs();});
-document.getElementById('filtro-rig').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filtroRig=b.dataset.f;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));pintarRigs();});
-
-// ===== 03 amplificadores =====
-let modoAmp='normal';
-function recomendado(ranura,L,m){
-  if(ranura==='herramienta')return L>=40?'backpack':L>=10?'noise-reduction':null;
-  if(ranura==='habilidad')return L>=45?(m==='escalada'?'evasive-maneuver':'smash'):L>=15?'hide-and-heal':null;
-  return L>=50?(m==='escalada'?'self-revive':'boosted'):L>=35?'last-chance':L>=20?'double-doses':null;
+document.getElementById('rigs').addEventListener('click',e=>{const b=e.target.closest('.plegar');if(!b)return;const id=b.closest('.rig').dataset.rig;cerrados.has(id)?cerrados.delete(id):cerrados.add(id);pintarNoakes(plan());});
+const VOTO={si:'CÓMPRALO',opc:'OPCIONAL',esc:'ESCALADA',no:'COMPLETAR'};
+const RANURAS=[['herramienta','HERRAMIENTA','Herramienta'],['habilidad','HABILIDAD','Habilidad'],['medicina','MEDICINA','Medicina']];
+function pintarDorris(p){
+  const et=etapaDe(E.nivel);
+  document.getElementById('cuenta-dorris').innerHTML='<b>'+AMPS.filter(a=>tiene(a.id)).length+'/27</b>comprado';
+  document.getElementById('ranuras').innerHTML=RANURAS.map(([r,t,nom])=>{
+    const fila=et.llevar.find(x=>x[0]===nom),rec=fila?(AMPS.find(a=>a.nombre===fila[1])||{}).id:null;
+    return '<div class="ranura"><div class="cabs">'+t+' <span>'+(fila?'lleva: '+fila[1]:'se abre en el nivel '+AMPS.find(a=>a.ranura===r).nivel)+'</span></div>'+AMPS.filter(a=>a.ranura===r).sort((a,b)=>a.nivel-b.nivel||PASO[a.id].n-PASO[b.id].n).map(a=>{
+      const bloq=E.nivel<a.nivel;return '<div class="amp '+(bloq?'bloq ':'')+(a.id===rec?'lleva':'')+'">'+chk(a.id,p[a.id].est)+'<img src="img/amps/'+a.id+'.png" alt=""><div><b>'+a.nombre+(a.id===rec?' ← equípalo':'')+'</b><small>'+a.efecto+'</small><small>'+(bloq?'🔒 ':'')+'nivel '+a.nivel+' · paso '+PASO[a.id].n+'</small></div><span class="voto '+a.voto+'">'+VOTO[a.voto]+'</span></div>';}).join('')+'</div>';}).join('');
 }
-const VOTO={si:'CÓMPRALO',opc:'OPCIONAL',esc:'ESCALADA',no:'NO HACE FALTA'};
-const RANURAS=[['herramienta','HERRAMIENTA','🔧',10],['habilidad','HABILIDAD','✊',15],['medicina','MEDICINA','✚',20]];
-function pintarAmps(){
-  const L=E.nivel;document.getElementById('rango-nivel').value=L;document.getElementById('ver-nivel').textContent=L;
-  document.getElementById('llevar').innerHTML=RANURAS.map(([r,t,ic,nv])=>{const id=recomendado(r,L,modoAmp);
-    if(!id)return '<div class="vacio"><div><small>'+t+'</small>Se abre en el nivel '+nv+'</div></div>';
-    const a=AMPS.find(x=>x.id===id);return '<div><img src="img/amps/'+id+'.png" alt=""><div><small>'+t+'</small><b>'+a.nombre+'</b></div></div>';}).join('');
-  document.getElementById('ranuras').innerHTML=RANURAS.map(([r,t,ic,nv])=>{const rec=recomendado(r,L,modoAmp);
-    return '<div class="ranura"><div class="cab">'+ic+' '+t+' <span>nivel '+nv+'</span></div>'+AMPS.filter(a=>a.ranura===r).map(a=>{
-      const bloq=L<a.nivel;return '<div class="amp '+(bloq?'bloq ':'')+(a.id===rec?'lleva':'')+'"><img src="img/amps/'+a.id+'.png" alt=""><div><b>'+a.nombre+(a.id===rec?' ← equípalo':'')+'</b><small>'+a.efecto+'</small><small>'+(bloq?'🔒 nivel '+a.nivel:'nivel '+a.nivel)+(tiene(a.id)?' · lo tienes':'')+'</small></div><span class="voto '+a.voto+'">'+VOTO[a.voto]+'</span></div>';}).join('')+'</div>';}).join('');
-}
-document.getElementById('rango-nivel').addEventListener('input',e=>{E.nivel=+e.target.value;guardar();pintarTodo();});
-document.getElementById('modo-amp').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;modoAmp=b.dataset.m;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));pintarAmps();});
-
-// ===== 04 recetas =====
-function pintarRecetas(){
+function pintarBarlow(p){
   const set=compradoSet();
+  document.getElementById('cuenta-barlow').innerHTML='<b>'+RECETAS.filter(x=>tiene(x.id)).length+'/23</b>comprado';
   document.getElementById('cats').innerHTML=[1,2,3].map(c=>{const ids=catIds(c),n=ids.filter(tiene).length;
     const cerrada=c>1&&!catCompleta(c-1,set),completa=n===ids.length;
-    return '<div class="cat '+(cerrada?'cerrada ':'')+(completa?'completa':'')+'"><h4>Categoría '+c+'</h4><div class="cont">'+n+'/'+ids.length+' · '+(ids.length-n)*2+' vales para completarla'+(completa?' · COMPLETA ✓':'')+'</div><div class="barrita"><i style="width:'+(n/ids.length*100)+'%"></i></div><div class="candado">🔒 Completa la categoría '+(c-1)+' primero</div>'+
-      RECETAS.filter(x=>x.cat===c).map((x,i)=>'<div class="rx"><input type="checkbox" class="chk" data-compra="'+x.id+'" '+(tiene(x.id)?'checked':'')+' '+(cerrada&&!tiene(x.id)?'disabled':'')+' aria-label="Comprada"><span class="o">'+(i+1)+'.</span><div><b>'+x.nombre+'</b><small>'+x.efecto+'</small></div></div>').join('')+'</div>';}).join('');
+    return '<div class="cat '+(cerrada?'cerrada ':'')+(completa?'completa':'')+'"><h4>Categoría '+c+'</h4><div class="cont">'+n+'/'+ids.length+' · '+(ids.length-n)*2+' vales para completarla'+(completa?' · COMPLETA ✓':'')+'</div><div class="barrita"><i style="width:'+(n/ids.length*100)+'%"></i></div><div class="candado">🔒 Compra todas las de la categoría '+(c-1)+'</div>'+
+      RECETAS.filter(x=>x.cat===c).map(x=>'<div class="rx">'+chk(x.id,p[x.id].est)+'<div><b>'+x.nombre+'</b><small>'+x.efecto+'</small><div class="tags" style="margin-top:4px">'+tagE(x.enfoque)+'</div></div>'+pasoHTML(x.id)+'</div>').join('')+'</div>';}).join('');
 }
+document.getElementById('tabs-tienda').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.tienda').forEach(t=>t.classList.toggle('on',t.id==='t-'+b.dataset.t));Amb.cambio();});
 
-// ===== 05 en la prueba =====
+// ===== 03 en la prueba =====
 const CARTAS=[
-  ['antidoto','Lleva siempre un antídoto','Quita la psicosis. Ocupa poco y te saca de los peores momentos.'],
+  ['botiquin','Cúrate escondido','La Curación se puede usar dentro de un escondite. Con Hide and Heal, además, recuperas 1 tramo al entrar.'],
+  ['antidoto','Desintoxicación = antídoto','Con esa mejora el gas quita la psicosis. Guarda el antídoto para cuando la Curación esté recargando.'],
+  ['venda','Veneno para escapar','Con Veneno, el gas aturde al soltarlo y frena a los enemigos un 75 % durante 5 s: te curas y escapas a la vez.'],
   ['ladrillo','Ladrillo o botella a mano','Con Técnica de autodefensa te sueltan de un agarre. También rompen las minas de gas.'],
   ['botella','Lanza primero, aturde después','Si golpeas a un enemigo aturdido, se le pasa. Primero el ladrillo, luego el Aturdimiento.'],
   ['bateria','Guarda algo para el final','El tren tarda unos 10 s en llegar. Ten listo el artefacto o algo para lanzar.'],
   ['adrenalina','Gasta lo que sobre','Las pilas, la adrenalina y las cargas del artefacto no pasan a la siguiente prueba; usarlas sube la nota.'],
-  ['ganzua','Sube de dificultad','XP fija por prueba: Estándar 500 · Intensiva 1.500 · Psicocirugía 3.000. Es la forma más rápida de ganar vales.'],
+  ['ganzua','Sube de dificultad','XP fija por prueba: Estándar 500 · Intensiva 1.500 · Psicocirugía 3.000. Es la forma más rápida de subir de nivel y ganar vales.'],
 ];
 document.getElementById('cartas').innerHTML=CARTAS.map(([img,t,d])=>'<button class="carta" type="button"><div class="in"><div class="cara frente" style="--img:url(img/objetos/'+img+'.png)"><small>TOCA PARA VER</small><b>'+t+'</b></div><div class="cara dorso"><b>'+t+'</b><span>'+d+'</span></div></div></button>').join('');
 document.getElementById('cartas').addEventListener('click',e=>{const c=e.target.closest('.carta');if(c){c.classList.toggle('vuelta');Amb.cambio();}});
@@ -599,7 +642,7 @@ function pintarQuiz(){const q=document.getElementById('quiz');
     q.querySelector('.exp').textContent=(i===P.ok?'✓ Bien. ':'✗ No. ')+P.e;const s=q.querySelector('.sig');s.hidden=false;s.onclick=()=>{qi++;pintarQuiz();};});
 }
 
-// ===== 06 escalada: reloj del reinicio semanal (martes 10:00 hora de Nueva York) =====
+// ===== 04 nivel máximo: reloj del reinicio semanal (martes 10:00 hora de Nueva York) =====
 function proximoReinicio(){
   const ahora=Date.now();
   const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',hourCycle:'h23'});
@@ -615,13 +658,14 @@ function pintarReloj(){let ms=objetivo-Date.now();if(ms<=0){objetivo=proximoRein
   const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60,s=Math.floor(ms/1e3)%60;
   const local=new Date(objetivo).toLocaleString('es-CO',{timeZone:'America/Bogota',weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
   document.getElementById('reloj').innerHTML=[[d,'DÍAS'],[h,'HORAS'],[m,'MIN'],[s,'SEG']].map(([v,t])=>'<div class="caja"><b>'+String(v).padStart(2,'0')+'</b><span>'+t+'</span></div>').join('')+'<div class="txt">Se renueva el '+local+' (hora de Bogotá), junto con la clasificación semanal.</div>';}
-setInterval(()=>{if(document.getElementById('escalada').classList.contains('activa'))pintarReloj();},1000);
-document.getElementById('tabs-esc').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.pestana').forEach(p=>p.classList.toggle('on',p.id===b.dataset.t));});
+setInterval(()=>{if(document.getElementById('p-esc').classList.contains('on')&&document.getElementById('final').classList.contains('activa'))pintarReloj();},1000);
+document.getElementById('tabs-final').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('#final .pestana').forEach(p=>p.classList.toggle('on',p.id===b.dataset.t));if(b.dataset.t==='p-esc')pintarReloj();Amb.cambio();});
+document.getElementById('fichas').innerHTML=FICHAS.map(([id,t])=>{const it=ITEM[id];return '<div>'+(it.icono?'<img src="'+it.icono+'" alt="">':'<span class="rxi">Rx</span>')+'<div><b>'+it.nombre+'</b><small>'+it.tipo+' · '+t+'</small></div></div>';}).join('');
 
 function pintarTodo(){
   document.querySelectorAll('#in-nivel,.espejo-nivel').forEach(i=>{if(document.activeElement!==i)i.value=E.nivel;});
   document.querySelectorAll('#in-vales,.espejo-vales').forEach(i=>{if(document.activeElement!==i)i.value=E.vales;});
-  pintarProxima();pintarRuta();pintarRigs();pintarAmps();pintarRecetas();
+  const p=plan();pintarInicio();pintarRuta();pintarNoakes(p);pintarDorris(p);pintarBarlow(p);
 }
 
 // ===== linterna de la portada =====
@@ -641,7 +685,7 @@ vistas.forEach((v,i)=>{if(i===0)return;const bar=document.createElement('div');b
 function mostrar(id,sonar){if(!ids.includes(id))id='inicio';
   vistas.forEach(v=>v.classList.toggle('activa',v.id===id));
   document.querySelectorAll('#menu a').forEach(a=>a.classList.toggle('activo',a.getAttribute('href')==='#'+id));
-  window.scrollTo(0,0);if(id==='escalada')pintarReloj();if(sonar)Amb.cambio();}
+  window.scrollTo(0,0);if(sonar)Amb.cambio();}
 window.addEventListener('hashchange',()=>mostrar(location.hash.slice(1),true));
 function pasarParte(d){const act=location.hash.slice(1)||'inicio';const i=Math.max(0,ids.indexOf(act));const j=Math.min(ids.length-1,Math.max(0,i+d));if(ids[j]!==act)location.hash=ids[j];}
 document.addEventListener('keydown',e=>{if(e.ctrlKey||e.altKey||e.metaKey||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;const k=e.key.toLowerCase();if(k==='q'||k==='arrowleft')pasarParte(-1);if(k==='e'||k==='arrowright')pasarParte(1);});
