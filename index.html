@@ -97,11 +97,11 @@ nav a:hover,nav a.activo{color:var(--verde);border-color:var(--verde-osc);backgr
 .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:18px}
 .rig{position:relative;background:var(--papel);border:1px solid var(--borde);padding:16px;transition:transform .2s,border-color .2s}
 .rig:hover{transform:translateY(-3px);border-color:var(--verde-osc)}
-.rig .cab{display:flex;gap:12px;align-items:center;margin-bottom:10px;padding-right:50px}
+.rig .cab{display:flex;gap:12px;align-items:center;margin-bottom:10px}
 .rig .cab img{width:64px;height:64px}
 .rig h4{margin:0;font:400 22px "Special Elite",monospace}
 .rig .en{font:12px "Roboto Mono",monospace;color:var(--suave)}
-.rango{position:absolute;top:12px;right:12px;font:400 26px "Special Elite",monospace;width:42px;height:42px;display:grid;place-items:center;border:2px solid currentColor}
+.uso.rango{background:transparent;border:1px solid currentColor;padding:1px 7px}
 .rS{color:var(--verde)}.rA{color:var(--ambar)}.rB{color:var(--suave)}
 .rig p{margin:0 0 8px;font-size:15px;color:#c3c7b8}
 .rig .mejoras{font:13px "Roboto Mono",monospace;color:var(--suave)}
@@ -207,7 +207,7 @@ footer li{margin-bottom:6px}
         <div class="nv">AHORA<b>4</b></div>
         <div>
           <h4>Con tus 9 vales: Aturdimiento + Duración extendida + 2 recetas</h4>
-          <p>Aún no tienes artefacto: es lo primero (2 vales) y Duración extendida (2). Luego las recetas Self Defense Technique y Run and Smash Doors (4). Te sobra 1.</p>
+          <p>Aún no tienes artefacto: es lo primero (2 vales) y Duración extendida (2). Luego las recetas Técnica de autodefensa y Corre y derriba puertas (4). Te sobra 1.</p>
           <div class="chips"><span class="chip"><img src="img/rigs/stun.png" alt="">Aturdimiento</span><span class="chip sin">Duración extendida</span><span class="chip sin">2 recetas cat. 1</span></div>
         </div>
       </div>
@@ -239,8 +239,8 @@ footer li{margin-bottom:6px}
         <div class="nv">NIVEL<b>20</b></div>
         <div>
           <h4>Medicina: Double Doses, y empezar la categoría 2</h4>
-          <p>Es de relleno hasta el 35. Recetas: Expanded Inventory → Speed Boost → Endurance.</p>
-          <div class="chips"><span class="chip"><img src="img/amps/double-doses.png" alt="">Double Doses</span><span class="chip sin">Expanded Inventory</span></div>
+          <p>Es de relleno hasta el 35. Recetas: Inventario ampliado → Potenciamiento de velocidad → Resiliencia.</p>
+          <div class="chips"><span class="chip"><img src="img/amps/double-doses.png" alt="">Double Doses</span><span class="chip sin">Inventario ampliado</span></div>
         </div>
       </div>
       <div class="paso aparece">
@@ -278,7 +278,7 @@ footer li{margin-bottom:6px}
         <div class="nv">NIVEL<b>50</b></div>
         <div>
           <h4>Medicina: Boosted, y luego la categoría 3</h4>
-          <p>Empiezas con un potenciador de vida, aguante o batería. Recetas: Stamina Recovery → Revitalize → Resistance.</p>
+          <p>Empiezas con un potenciador de vida, aguante o batería. Recetas: Recuperación de resistencia → Rejuvenecer → Resistencia.</p>
           <div class="chips"><span class="chip"><img src="img/amps/boosted.png" alt="">Boosted</span></div>
         </div>
       </div>
@@ -299,42 +299,42 @@ footer li{margin-bottom:6px}
   <div class="bloque">
     <div class="rejilla">
       <article class="rig aparece">
-        <div class="rango rS">S</div>
         <div class="cab"><img src="img/rigs/stun.png" alt=""><div><h4>Aturdimiento</h4><div class="en">Stun · 5 s · recarga 200 s</div></div></div>
+        <span class="uso rango rS">RANGO S</span>
         <span class="uso">1.ª SOLO</span><span class="uso grupo">GRUPO</span>
         <p>Una granada eléctrica aturde a los enemigos. Es la huida más fiable.</p>
         <div class="mejoras"><b>Primero:</b> Duración extendida (8 s) → Radio ampliado → Desarme</div>
       </article>
       <article class="rig aparece">
-        <div class="rango rS">S</div>
         <div class="cab"><img src="img/rigs/jammer.png" alt=""><div><h4>Interceptor</h4><div class="en">Jammer · candados, trampas, TV</div></div></div>
+        <span class="uso rango rS">RANGO S</span>
         <span class="uso">SOLO</span><span class="uso grupo">GRUPO</span>
         <p>Hackea candados, televisores, radios, trampas y persianas. Con Pacificador es una vida extra.</p>
         <div class="mejoras"><b>Primero:</b> Pacificador → Larga distancia → Recuperación reducida</div>
       </article>
       <article class="rig aparece">
-        <div class="rango rA">A</div>
         <div class="cab"><img src="img/rigs/heal.png" alt=""><div><h4>Curación</h4><div class="en">Heal · gas 2 s · recarga 180 s</div></div></div>
+        <span class="uso rango rA">RANGO A</span>
         <span class="uso grupo">1.ª GRUPO</span>
         <p>Un gas que te cura a ti y a quien esté cerca. En grupo basta con uno que lo lleve.</p>
         <div class="mejoras"><b>Primero:</b> Duración extendida → Desintoxicación (quita la psicosis)</div>
       </article>
       <article class="rig aparece">
-        <div class="rango rA">A</div>
         <div class="cab"><img src="img/rigs/barricade.png" alt=""><div><h4>Barricada</h4><div class="en">Barricade · 2–3 cargas · 90 s</div></div></div>
+        <span class="uso rango rA">RANGO A</span>
         <span class="uso">SOLO</span>
         <p>Bloquea puertas. Desde marzo de 2026 tiene cargas y ha mejorado mucho.</p>
         <div class="mejoras"><b>Primero:</b> Barricada adicional → Instalación rápida</div>
       </article>
       <article class="rig aparece">
-        <div class="rango rB">B</div>
         <div class="cab"><img src="img/rigs/x-ray.png" alt=""><div><h4>Rayos X</h4><div class="en">X-Ray · se enciende y se apaga</div></div></div>
+        <span class="uso rango rB">RANGO B</span>
         <p>Ves a los enemigos a través de las paredes. Desde marzo de 2026 se enciende y apaga como la visión nocturna.</p>
         <div class="mejoras"><b>Primero:</b> Reconocimiento → Mayor capacidad</div>
       </article>
       <article class="rig aparece">
-        <div class="rango rB">B</div>
         <div class="cab"><img src="img/rigs/blind.png" alt=""><div><h4>Ceguera</h4><div class="en">Blind · mina de humo · 15 s</div></div></div>
+        <span class="uso rango rB">RANGO B</span>
         <p>Una mina de humo que ciega a los enemigos. Tarda 4 s en colocarse, demasiado para una huida.</p>
         <div class="mejoras"><b>Primero:</b> Técnica de despliegue → Duración extendida</div>
       </article>
@@ -394,37 +394,37 @@ footer li{margin-bottom:6px}
         <h4>Categoría 1</h4>
         <p class="nota">7 recetas · 14 vales · LA TUYA AHORA</p>
         <ol>
-          <li><b>Self Defense Technique</b><small>te sueltas de un Pouncer con un ladrillo o una botella</small></li>
-          <li><b>Run and Smash Doors</b><small>abres las puertas corriendo</small></li>
-          <li><b>Instant Use</b><small>usas el objeto al recogerlo</small></li>
-          <li><b>Slide</b><small>te deslizas</small></li>
-          <li><b>Regeneration</b><small>regeneras 1 tramo de vida</small></li>
-          <li><b>Hard Kick</b><small>ayudas a un aliado agarrado sin agotarte (en grupo, más arriba)</small></li>
-          <li><b>Stay of Execution</b><small>salvas a un aliado de una ejecución (en grupo, más arriba)</small></li>
+          <li><b>Técnica de autodefensa</b><small>te sueltas de un Pouncer con un ladrillo o una botella</small></li>
+          <li><b>Corre y derriba puertas</b><small>abres las puertas corriendo</small></li>
+          <li><b>Uso instantáneo</b><small>usas el objeto al recogerlo</small></li>
+          <li><b>Deslizarte</b><small>te deslizas</small></li>
+          <li><b>Regeneración</b><small>regeneras 1 tramo de vida</small></li>
+          <li><b>Patada firme</b><small>ayudas a un aliado agarrado sin agotarte (en grupo, más arriba)</small></li>
+          <li><b>Suspensión de ejecución</b><small>salvas a un aliado de una ejecución (en grupo, más arriba)</small></li>
         </ol>
       </div>
       <div class="cat aparece">
         <h4>Categoría 2</h4>
         <p class="nota">9 recetas · 18 vales</p>
         <ol>
-          <li><b>Expanded Inventory</b><small>+1 hueco</small></li>
-          <li><b>Speed Boost</b></li>
-          <li><b>Endurance</b></li>
-          <li><b>Battery Extension</b></li>
-          <li><b>Athlete</b></li>
-          <li><b>Doors Basher · Breaching Technique · Heavy Training</b><small>cualquier orden</small></li>
-          <li><b>Gymnast</b><small>la última</small></li>
+          <li><b>Inventario ampliado</b><small>+1 hueco</small></li>
+          <li><b>Potenciamiento de velocidad</b></li>
+          <li><b>Resiliencia</b></li>
+          <li><b>Extensión de batería</b></li>
+          <li><b>Atleta</b></li>
+          <li><b>Rompepuertas · Técnica de rompimiento · Entrenamiento duro</b><small>cualquier orden</small></li>
+          <li><b>Gimnasta</b><small>la última</small></li>
         </ol>
       </div>
       <div class="cat aparece">
         <h4>Categoría 3</h4>
         <p class="nota">7 recetas · 14 vales</p>
         <ol>
-          <li><b>Stamina Recovery</b></li>
-          <li><b>Revitalize</b><small>vida completa al revivir o al reaparecer en solitario</small></li>
-          <li><b>Resistance</b></li>
-          <li><b>Medic</b><small>en grupo, la primera</small></li>
-          <li><b>Advanced Regeneration · Deep Breaths · Anti-Ambush</b><small>las últimas</small></li>
+          <li><b>Recuperación de resistencia</b></li>
+          <li><b>Rejuvenecer</b><small>vida completa al revivir o al reaparecer en solitario</small></li>
+          <li><b>Resistencia</b></li>
+          <li><b>Medicina</b><small>en grupo, la primera</small></li>
+          <li><b>Regeneración avanzada · Respiración profunda · Anti-emboscada</b><small>las últimas</small></li>
         </ol>
       </div>
     </div>
@@ -443,7 +443,7 @@ footer li{margin-bottom:6px}
   <div class="bloque">
     <div class="consejos">
       <div class="consejo aparece"><img src="img/objetos/antidoto.png" alt=""><div><b>Lleva siempre un antídoto</b><span>Quita la psicosis. Ocupa poco y te saca de los peores momentos.</span></div></div>
-      <div class="consejo aparece"><img src="img/objetos/ladrillo.png" alt=""><div><b>Un ladrillo o una botella en la mano</b><span>Con Self Defense Technique te sueltan de un agarre. También rompen las minas de gas.</span></div></div>
+      <div class="consejo aparece"><img src="img/objetos/ladrillo.png" alt=""><div><b>Un ladrillo o una botella en la mano</b><span>Con Técnica de autodefensa te sueltan de un agarre. También rompen las minas de gas.</span></div></div>
       <div class="consejo aparece"><img src="img/rigs/stun.png" alt="" style="object-fit:contain;background:#000"><div><b>Lanza primero, aturde después</b><span>Si golpeas a un enemigo aturdido, se le pasa el aturdimiento. Primero el ladrillo, luego el Aturdimiento.</span></div></div>
       <div class="consejo aparece"><img src="img/objetos/bateria.png" alt=""><div><b>Guarda algo para el final</b><span>El tren tarda unos 10 s en llegar. Ten listo el artefacto o algo para lanzar.</span></div></div>
       <div class="consejo aparece"><img src="img/objetos/adrenalina.png" alt=""><div><b>Gasta lo que te sobre antes de salir</b><span>Las pilas, la adrenalina y las cargas del artefacto suben la nota y la XP.</span></div></div>
@@ -487,7 +487,7 @@ footer li{margin-bottom:6px}
         <tr><th>Qué</th><th>Dato</th></tr>
         <tr><td>Qué hace</td><td>Vuelves del 99 al 1 y se bloquea todo lo que no hayas dejado fijo.</td></tr>
         <tr><td>Qué ganas</td><td>1 ficha permanente por recaída: deja fijo un artefacto, una mejora, una receta o un amplificador.</td></tr>
-        <tr><td>Qué fijar primero</td><td class="primera">Lo que más uses: Aturdimiento o Interceptor, o la receta Expanded Inventory</td></tr>
+        <tr><td>Qué fijar primero</td><td class="primera">Lo que más uses: Aturdimiento o Interceptor, o la receta Inventario ampliado</td></tr>
         <tr><td>Qué conservas</td><td>Los cosméticos, las estadísticas, las monedas (menos los vales) y la partida de Escalada.</td></tr>
       </table></div>
     </div>
