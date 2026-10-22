@@ -14,6 +14,7 @@
   --texto:#d9dccf; --suave:#9aa08d; --verde:#9fe870; --verde-osc:#3e5a2a;
   --rojo:#c8312b; --ambar:#e0b44c; --sello:#b8322b; --azul:#8fb7e8;
   --cur:#9fe870; --atu:#8fb7e8; --sup:#e0b44c; --otro:#9aa08d;
+  --noakes:#e8955a; --barlow:#c79be8; --dorris:#5fd3c9;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -116,6 +117,16 @@ nav .q{font:600 11px "Roboto Mono",monospace;color:var(--suave);border:1px solid
 .chk:checked::after{content:"✓";color:#0b0c0a;font-weight:700;font-size:15px}
 .chk:disabled{opacity:.3;cursor:not-allowed}
 .tag{font:600 10px "Roboto Mono",monospace;letter-spacing:.08em;padding:2px 6px;border:1px solid var(--borde);color:var(--suave);text-transform:uppercase;white-space:nowrap}
+.tag.t-noakes{background:var(--noakes);border-color:var(--noakes);color:#120c08}.tag.t-barlow{background:var(--barlow);border-color:var(--barlow);color:#120c08}.tag.t-dorris{background:var(--dorris);border-color:var(--dorris);color:#120c08}
+.tres{max-width:860px;margin:18px auto 0;text-align:left}
+.tres>p{font:600 12px "Roboto Mono",monospace;letter-spacing:.08em;color:var(--suave);margin:0 0 8px;text-transform:uppercase}
+.tres .fila3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:700px){.tres .fila3{grid-template-columns:1fr}}
+.tres .tnd{background:#000c;border:1px solid var(--borde);border-top:4px solid var(--c);padding:10px 12px}
+.tres .tnd b{display:block;color:var(--c);font:400 20px "Special Elite",monospace}
+.tres .tnd span{display:block;font-size:14px;color:var(--suave)}
+.tres .tnd em{display:block;font:600 11px "Roboto Mono",monospace;letter-spacing:.06em;margin-top:6px;font-style:normal}
+.tres .tnd em.cerrada{color:var(--sup)}.tres .tnd em.abierta{color:var(--verde)}
 .tag.e-cur{border-color:var(--cur);color:var(--cur)}.tag.e-atu{border-color:var(--atu);color:var(--atu)}.tag.e-sup{border-color:var(--sup);color:var(--sup)}
 .hito{font:600 12px "Roboto Mono",monospace;color:var(--verde);letter-spacing:.15em;margin:18px 0 8px}
 
@@ -335,6 +346,7 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
       <div>Estás en<b id="ver-etapa"></b></div>
     </div>
     <div class="proxima" id="proxima"></div>
+    <div class="tres" id="tres-inicio"></div>
     <div class="enfoques" id="enfoques"></div>
     <div class="accesos">
       <a class="acceso" href="#ruta" style="background-image:url(img/escenas/steam-fondo-pagina.jpg)"><span><small>01</small>Ruta 1 → 99</span></a>
@@ -369,7 +381,7 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
     <div class="titulo">
       <div class="num">EXPEDIENTE 01</div>
       <h2>Ruta del 1 al 99</h2>
-      <p class="bajada">8 etapas y 98 compras de <b>2 vales</b>. Los vales llegan al subir de nivel: <b>3</b> por nivel hasta el 15, <b>2</b> hasta el 85 y <b>1</b> hasta el 99. Son 196 en total: justo lo que cuesta todo.</p>
+      <p class="bajada">8 etapas y 98 compras de <b>2 vales</b> repartidas entre <b>3 tiendas</b>: Noakes (artefactos), Barlow (recetas) y Dorris (amplificadores, desde el nivel 10). Sigue los pasos en orden y cada uno te dice en qué tienda comprarlo. Los vales llegan al subir de nivel: <b>3</b> por nivel hasta el 15, <b>2</b> hasta el 85 y <b>1</b> hasta el 99. Son 196 en total: justo lo que cuesta todo.</p>
     </div>
   </div>
   <div class="bloque">
@@ -378,6 +390,7 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
       <span class="mini">Tus vales</span><div class="num-in"><button type="button" data-paso="vales:-1">−</button><input class="espejo-vales" type="number" min="0" max="999"><button type="button" data-paso="vales:1">+</button></div>
       <div class="seg" id="filtro-ruta"><button class="on" data-f="pend">Ocultar comprado</button><button data-f="todo">Ver todo</button></div>
     </div>
+    <div class="tres" id="tres-ruta" style="max-width:none;margin:0 0 16px"></div>
     <div class="resumen" id="resumen"></div>
     <div class="linea" id="linea"></div>
     <div id="etapas"></div>
@@ -498,6 +511,18 @@ ARTEFACTOS.forEach(r=>{ITEM[r.id]={id:r.id,nombre:r.nombre,tipo:'Artefacto',dond
   r.mejoras.forEach(m=>ITEM[m.id]={id:m.id,nombre:m.nombre,tipo:'Mejora de '+r.nombre,donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',rig:r.id,enfoque:r.enfoque});});
 AMPS.forEach(a=>ITEM[a.id]={id:a.id,nombre:a.nombre,tipo:'Amplificador · '+a.ranura,donde:'Dorris',nivel:a.nivel,icono:'img/amps/'+a.id+'.png',enfoque:a.enfoque});
 RECETAS.forEach(x=>ITEM[x.id]={id:x.id,nombre:x.nombre,tipo:'Receta · categoría '+x.cat,donde:'Barlow',nivel:1,cat:x.cat,enfoque:x.enfoque});
+const TIENDAS={
+  Noakes:{c:'noakes',vende:'Artefactos y sus mejoras',cosa:'artefacto',donde:'taller',abre:1},
+  Barlow:{c:'barlow',vende:'Recetas (mejoras pasivas)',cosa:'receta',donde:'farmacia, la enfermera',abre:1},
+  Dorris:{c:'dorris',vende:'Amplificadores (3 ranuras)',cosa:'amplificador',donde:'cafetería',abre:10}};
+const tagT=it=>'<span class="tag t-'+TIENDAS[it.donde].c+'">'+it.donde+' · '+TIENDAS[it.donde].cosa+'</span>';
+function pintarTres(elId){
+  const p=plan();
+  document.getElementById(elId).innerHTML='<p>Los mismos vales sirven en las 3 tiendas</p><div class="fila3">'+Object.entries(TIENDAS).map(([n,t])=>{
+    const ids=RUTA.filter(([id])=>ITEM[id].donde===n).map(r=>r[0]),h=ids.filter(tiene).length,ya=ids.filter(id=>p[id].est==='ya').length;
+    const st=E.nivel<t.abre?'<em class="cerrada">CERRADA: SE ABRE EN EL NIVEL '+t.abre+' (te faltan '+(t.abre-E.nivel)+')</em>':'<em class="abierta">ABIERTA'+(ya?' · '+ya+' para comprar ya':'')+'</em>';
+    return '<div class="tnd" style="--c:var(--'+t.c+')"><b>'+n+'</b><span>'+t.vende+' · '+t.donde+'</span><span>'+h+' de '+ids.length+' comprado</span>'+st+'</div>';}).join('')+'</div>';
+}
 const catIds=c=>RECETAS.filter(x=>x.cat===c).map(x=>x.id);
 const catCompleta=(c,set)=>catIds(c).every(id=>set.has(id));
 const etapaDe=L=>ETAPAS.find(e=>L>=e.desde&&L<=e.hasta)||ETAPAS[ETAPAS.length-1];
@@ -519,7 +544,7 @@ function plan(){
   RUTA.forEach(([id])=>{const it=ITEM[id];let est,txt;
     if(tiene(id)){est='hecho';txt='COMPRADO';}
     else{const b=bloqueo(it,set);
-      if(b){est=b.startsWith('Nivel')?'nivel':'espera';txt=b.toUpperCase();}
+      if(b){est=b.startsWith('Nivel')?'nivel':'espera';txt=est==='nivel'?(it.donde==='Dorris'&&E.nivel<10?'DORRIS SE ABRE EN EL NIVEL 10':'SE ABRE EN EL NIVEL '+it.nivel):b.toUpperCase();}
       else if(v>=2){est='ya';txt='CÓMPRALO YA';v-=2;set.add(id);}
       else{est='ahorra';txt='FALTAN VALES';}}
     r[id]={est,txt};});
@@ -551,7 +576,8 @@ function pintarInicio(){
   const sig=ya[0]||RUTA.find(([id])=>p[id].est!=='hecho');const el=document.getElementById('proxima');
   if(!sig){el.innerHTML='<div><small>TODO COMPRADO</small><b>98 de 98: ruta completa</b><span>Ya puedes hacer la recaída en el 99.</span></div><a href="#final">Nivel máximo →</a>';}
   else{const it=ITEM[sig[0]],e=p[sig[0]];
-    el.innerHTML='<div class="ico">'+icoHTML(it)+'</div><div><small>'+(e.est==='ya'?'TU PRÓXIMA COMPRA · PASO '+PASO[it.id].n:'LO SIGUIENTE · '+e.txt.toLowerCase())+'</small><b>'+it.nombre+'</b><span>'+it.tipo+' · a '+it.donde+' · '+sig[1]+'</span></div><a href="#ruta">'+(ya.length>1?'+'+(ya.length-1)+' más →':'Ver ruta →')+'</a>';}
+    el.innerHTML='<div class="ico">'+icoHTML(it)+'</div><div><small>'+(e.est==='ya'?'TU PRÓXIMA COMPRA · PASO '+PASO[it.id].n:'LO SIGUIENTE · '+e.txt.toLowerCase())+'</small><b>'+it.nombre+'</b><span>'+tagT(it)+' '+it.tipo+' · '+sig[1]+'</span></div><a href="#ruta">'+(ya.length>1?'+'+(ya.length-1)+' más →':'Ver ruta →')+'</a>';}
+  pintarTres('tres-inicio');
   document.getElementById('enfoques').innerHTML=['cur','atu','sup'].map(k=>{const f=ENFOQUES[k],ids=RUTA.filter(([id])=>ITEM[id].enfoque===k).map(r=>r[0]),n=ids.filter(tiene).length;
     return '<div class="enf" style="--c:'+colorE(k)+';--p:'+(n/ids.length*100)+'%"><img src="'+f.icono+'" alt=""><small>PRIORIDAD '+f.n+'</small><b>'+f.nombre+'</b><span>'+f.texto+'</span><i></i><em>'+n+' de '+ids.length+' compras</em></div>';}).join('');
 }
@@ -561,6 +587,7 @@ let ocultarHechos=true;const etapasAbiertas=new Set();let etapaVista=null;
 function pintarRuta(){
   const p=plan(),et=etapaDe(E.nivel),hechos=RUTA.filter(([id])=>tiene(id)).length,ya=RUTA.filter(([id])=>p[id].est==='ya').length;
   if(etapaVista!==et.n){etapasAbiertas.clear();etapasAbiertas.add(et.n);etapaVista=et.n;}
+  pintarTres('tres-ruta');
   document.getElementById('resumen').innerHTML=
     '<div class="verde"><b>'+ya+'</b>puedes comprar ya</div><div><b>'+E.vales+'</b>vales tuyos</div><div><b>'+hechos+'/98</b>comprado</div><div><b>'+(196-valesHasta(E.nivel))+'</b>vales por ganar hasta el 99</div>';
   // línea 1 → 99
@@ -573,9 +600,9 @@ function pintarRuta(){
     const ids=RUTA.filter(([id])=>PASO[id].etapa===e.n).map(r=>r[0]),n=ids.filter(tiene).length,ab=etapasAbiertas.has(e.n);
     const gana=valesHasta(e.hasta)-valesHasta(Math.max(1,e.desde-1));
     const filas=ids.map(id=>{const it=ITEM[id],x=p[id],ps=PASO[id];
-      return '<div class="compra '+x.est+'" style="--c:'+colorE(it.enfoque)+'">'+chk(id,x.est)+'<div class="ico">'+icoHTML(it)+'</div><div><b>'+ps.n+'. '+it.nombre+'</b><small>'+ps.porque+'</small><div class="tags">'+tagE(it.enfoque)+'<span class="tag">'+it.donde+'</span><span class="tag">nivel '+ps.nivel+'</span></div></div><div class="estado">'+x.txt+'</div></div>';}).join('');
+      return '<div class="compra '+x.est+'" style="--c:'+colorE(it.enfoque)+'">'+chk(id,x.est)+'<div class="ico">'+icoHTML(it)+'</div><div><b>'+ps.n+'. '+it.nombre+'</b><small>'+ps.porque+'</small><div class="tags">'+tagT(it)+tagE(it.enfoque)+'<span class="tag">nivel '+ps.nivel+'</span></div></div><div class="estado">'+x.txt+'</div></div>';}).join('');
     return '<article class="etapa '+(ab?'abierta ':'')+(e.n===et.n?'actual':'')+'" id="etapa-'+e.n+'">'+
-      '<button class="cab" type="button" data-etapa="'+e.n+'" style="background-image:url(img/escenas/'+e.img+'.jpg)"><div><small>ETAPA '+e.n+' · NIVEL '+e.desde+'–'+e.hasta+(e.n===et.n?' · ESTÁS AQUÍ':'')+'</small><h3>'+e.titulo+'</h3><p>'+e.meta+'</p><div class="chips"><span>+'+gana+' vales</span><span>'+ids.length+' compras</span><span class="'+(n===ids.length?'ok':'')+'">'+n+'/'+ids.length+' hechas</span></div></div><span class="flecha">'+(ab?'▲':'▼')+'</span></button>'+
+      '<button class="cab" type="button" data-etapa="'+e.n+'" style="background-image:url(img/escenas/'+e.img+'.jpg)"><div><small>ETAPA '+e.n+' · NIVEL '+e.desde+'–'+e.hasta+(e.n===et.n?' · ESTÁS AQUÍ':'')+'</small><h3>'+e.titulo+'</h3><p>'+e.meta+'</p><div class="chips"><span>+'+gana+' vales</span><span>'+ids.length+' compras</span>'+Object.keys(TIENDAS).map(t=>{const k=ids.filter(id=>ITEM[id].donde===t).length;return k?'<span style="border-color:var(--'+TIENDAS[t].c+');color:var(--'+TIENDAS[t].c+')">'+k+' '+t+'</span>':'';}).join('')+'<span class="'+(n===ids.length?'ok':'')+'">'+n+'/'+ids.length+' hechas</span></div></div><span class="flecha">'+(ab?'▲':'▼')+'</span></button>'+
       '<div class="cuerpo"><div class="'+(ocultarHechos?'oculta-hechos':'')+'">'+filas+(ocultarHechos&&n===ids.length?'<p class="mini">Etapa completa ✓</p>':'')+'</div>'+
       '<div class="equipo"><h4>AL TERMINAR LA ETAPA, LLEVA</h4><div class="envuelve"><table class="tabla"><tr><th>Ranura</th><th>1.ª opción</th><th>Opcional</th></tr>'+e.llevar.map(([r,a,b])=>'<tr><td>'+r+'</td><td class="primera">'+a+'</td><td>'+b+'</td></tr>').join('')+'</table></div></div></div></article>';}).join('');
 }
