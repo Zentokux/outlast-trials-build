@@ -410,7 +410,7 @@ footer ul{padding-left:18px;color:var(--suave);font-size:14px}
   <div class="bloque">
     <div class="barra"><div class="seg" id="tabs-tienda"><button class="on" data-t="noakes">Noakes · artefactos</button><button data-t="dorris">Dorris · amplificadores</button><button data-t="barlow">Barlow · recetas</button></div></div>
     <div class="tienda on" id="t-noakes">
-      <div class="tendero"><img src="img/rigs/heal.png" alt="" width="48" height="48"><div><b>Noakes</b><span>Taller del pabellón. Artefacto («Activar») + 7 mejoras = 16 vales cada uno. Solo llevas uno.</span></div><div class="cuenta" id="cuenta-noakes"></div></div>
+      <div class="tendero"><img src="img/rigs/heal.png" alt="" width="48" height="48"><div><b>Noakes</b><span>Taller del pabellón. Artefacto («Activar») + 7 mejoras en cadena (cada una pide la anterior) = 16 vales cada uno. Solo llevas uno.</span></div><div class="cuenta" id="cuenta-noakes"></div></div>
       <div class="rejilla" id="rigs"></div>
     </div>
     <div class="tienda" id="t-dorris">
@@ -508,7 +508,7 @@ const compradoSet=()=>new Set(Object.keys(E.comprado).filter(k=>E.comprado[k]));
 // índice de todo lo que se compra
 const ITEM={};
 ARTEFACTOS.forEach(r=>{ITEM[r.id]={id:r.id,nombre:r.nombre,tipo:'Artefacto',donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',enfoque:r.enfoque};
-  r.mejoras.forEach(m=>ITEM[m.id]={id:m.id,nombre:m.nombre,tipo:'Mejora de '+r.nombre,donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',rig:r.id,enfoque:r.enfoque});});
+  r.mejoras.forEach((m,k)=>ITEM[m.id]={id:m.id,nombre:m.nombre,tipo:'Mejora '+(k+1)+' de 7 de '+r.nombre,prev:k?r.mejoras[k-1].id:null,donde:'Noakes',nivel:1,icono:'img/rigs/'+r.icono+'.png',rig:r.id,enfoque:r.enfoque});});
 AMPS.forEach(a=>ITEM[a.id]={id:a.id,nombre:a.nombre,tipo:'Amplificador · '+a.ranura,donde:'Dorris',nivel:a.nivel,icono:'img/amps/'+a.id+'.png',enfoque:a.enfoque});
 RECETAS.forEach(x=>ITEM[x.id]={id:x.id,nombre:x.nombre,tipo:'Receta · categoría '+x.cat,donde:'Barlow',nivel:1,cat:x.cat,enfoque:x.enfoque});
 const TIENDAS={
@@ -535,6 +535,7 @@ const PASO={};
 function bloqueo(it,set){
   if(E.nivel<it.nivel)return 'Nivel '+it.nivel;
   if(it.rig&&!set.has(it.rig))return 'Antes: '+ITEM[it.rig].nombre;
+  if(it.prev&&!set.has(it.prev))return 'Antes: '+ITEM[it.prev].nombre;
   if(it.cat>1&&!catCompleta(it.cat-1,set))return 'Completa la categoría '+(it.cat-1);
   return null;
 }
@@ -621,7 +622,7 @@ function pintarNoakes(p){
     const n=lista.filter(m=>tiene(m.id)).length,cer=cerrados.has(r.id);
     return '<article class="rig '+(r.enfoque==='otro'?'fuera ':'')+(cer?'cerrado':'')+'" style="--c:'+colorE(r.enfoque)+'" data-rig="'+r.id+'"><div class="cabr"><img src="img/rigs/'+r.icono+'.png" alt=""><div><h4>'+r.nombre+'</h4><div class="en">'+r.en+' · tienes '+n+'/8</div></div></div>'+
       tagE(r.enfoque)+'<p style="margin-top:8px">'+r.resumen+'</p>'+
-      '<div class="lista">'+lista.map(m=>'<div class="mej">'+chk(m.id,p[m.id].est)+'<div><b>'+m.nombre+'</b><small>'+m.efecto+'</small></div>'+pasoHTML(m.id)+'</div>').join('')+'</div>'+
+      '<div class="lista">'+lista.map((m,k)=>'<div class="mej">'+chk(m.id,p[m.id].est)+'<div><b>'+(k?k+'. ':'')+m.nombre+'</b><small>'+m.efecto+'</small></div>'+pasoHTML(m.id)+'</div>').join('')+'</div>'+
       '<button class="plegar" type="button">'+(cer?'Ver mejoras ▼':'Ocultar ▲')+'</button></article>';}).join('');
 }
 document.getElementById('rigs').addEventListener('click',e=>{const b=e.target.closest('.plegar');if(!b)return;const id=b.closest('.rig').dataset.rig;cerrados.has(id)?cerrados.delete(id):cerrados.add(id);pintarNoakes(plan());});
